@@ -12,4 +12,4 @@
    - i-useState
       - [cards-adder](https://cards-adder.vercel.app/)
    - ii-useEffect
-      - [theme-changer]((https://theme-changer-gamma.vercel.app/))
+      - [theme-changer](https://theme-changer-gamma.vercel.app/)
