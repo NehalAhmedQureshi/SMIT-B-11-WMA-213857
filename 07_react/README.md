@@ -6,8 +6,8 @@
 1. components
           - [vercel](https://react-henna-six.vercel.app/)
 1. hooks
-   - i-useState
-      -[counter](https://react-01-usestate.vercel.app/)
+   - i-useState 
+      - [counter](https://react-01-usestate.vercel.app/)
    - ii-useEffect
       - [wheather-app](https://react-weatherapp-lime.vercel.app/)
 1. hooksRevision
