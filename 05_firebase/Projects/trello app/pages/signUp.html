@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- & fontawsome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- & boxicon cdn link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- ? custom stylesheet -->
+     <link rel="stylesheet" href="../styles/signUp.css">
+    <title>SignUp</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <form id="signUpForm">
+            <h1>SignUp Form</h1>
+            <label id="userimg" for="userImg">
+                <i class='bx bx-user-circle'></i>
+            </label>
+            <div class="message"></div>
+            <input type="file" id="userImg" class="userImg" required />
+            <input type="text" class="userName" placeholder="username" required  />
+            <input type="text" class="fatherName" placeholder="fathername" required />
+            <input type="email" class="userEmail" placeholder="userEmail" required />
+            <div class="password">
+                <input type="password" class="userPassword" placeholder="userPassword required" required />
+                <i class="passwordShow fa-solid fa-eye"></i>
+                <input type="password" class="confirmPassword" placeholder="confirmPassword" required/>
+                <i class="confirmPasswordShow fa-solid fa-eye"></i>
+            </div>
+            <button type="submit" class="submit">SignUp</button>
+    
+        </form>
+    </div>
+
+    <!--* add script file  -->
+    <script type="module" src="../scripts/signup.js"></script>
+</body>
+
+</html>

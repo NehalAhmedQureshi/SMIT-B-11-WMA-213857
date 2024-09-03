@@ -1,0 +1,139 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.wrap {
+    width: 100%;
+    height: 100vh;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    border-radius: 15px;
+    width: 30%;
+    background: rgb(67, 67, 205);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.main .navbar {
+    flex-grow: 0.3;
+    background: #fffdfd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.date {
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+}
+.time {
+    display: flex;
+    font-size: 13px;
+    font-weight: 600;
+}
+.battery .batteryIcon i {
+    font-size: 13px;
+    font-weight: 600;
+}
+.main .home {
+    flex-grow: 9;
+}
+.main .footer {
+    flex-grow: 0.3;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.footer .cpright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+.footer .cpright p {
+    font-size: 13px;
+    font-weight: 600;
+}
+.footer i {
+    font-size: 13px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+/* home */
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* justify-content: ; */
+    align-items: center;
+    border: 2px solid black;
+}
+.home .tablePrinter {
+    display: flex;
+    font-weight: 700;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 25px;
+    letter-spacing: 10px;
+    line-height: 40px;
+    font-family: josefin sans;
+}
+.home input {
+    width: 80px;
+    height: 40px;
+    border-radius: 50px;
+    padding-left: 10px;
+    font-size: 20px;
+    font-family: josefin sans;
+}
+.home form input:focus {
+    box-shadow: 1px 1px 40px rgb(204, 250, 255);
+}
+
+/* media querry */
+@media screen and (max-width:1075px ) {
+    .main {
+        width: 60%;
+    }
+    .home {
+        overflow: auto;
+    }
+}
+@media screen and (max-width:810px ) {
+    .main {
+        width: 80%;
+    }
+}
+@media screen and (max-width:650px ) {
+    .main {
+        width: 100%;
+    }
+    .home .tablePrinter {
+        font-size: 20px;
+        letter-spacing: 6px;
+        line-height: 30px;
+    }
+}
+@media screen and (max-width:330px) {
+    .home .tablePrinter {
+        letter-spacing: 3px;
+        line-height: 25px;
+    }
+}

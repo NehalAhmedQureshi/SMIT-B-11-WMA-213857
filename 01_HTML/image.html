@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #414141;
+            color: #ffff;
+        }
+    </style>
+</head>
+<body>
+    <img src="./imge.jpg" alt="no image">
+
+    <picture>
+    <source media="(min-width: 650px)" srcset="./image.jpg" />
+    <source media="(min-width: 460px)" srcset="./image2.jpg"  />
+
+    <img src="./image.jpg" alt="no image">
+    </picture>
+
+   <!-- an image map generator-->
+   <img src="image.jpg" usemap="#image-map">
+
+   <map name="image-map">
+       <area onclick="one()" target="" alt="" title="" href="" coords="130,91,43" shape="circle">
+       <area onclick="two()" target="" alt="" title="" href="" coords="83,131,13,249" shape="rect">
+   </map>
+
+   <script>
+    function one(){
+        alert("you clicked on one")
+    }
+    function two(){
+        alert("you clicked on two")
+    }
+   </script>
+</body>
+</html>

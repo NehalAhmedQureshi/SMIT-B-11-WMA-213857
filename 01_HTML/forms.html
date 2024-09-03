@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: #414141;
+            color: aqua;
+            text-align: center;
+            
+        }
+
+        input {
+            border: 3px solid gold;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        textarea {
+            padding: 4px;
+            color:blueviolet ;
+            border: 5px solid greenyellow;
+            font-style:initial;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+    <title>Form</title>
+</head>
+<body>
+
+    <h1>Form in HTML</h1>
+    <!-- <form action="">
+        <p>Username:
+            <input type="text" name="username" size="15" 
+            maxlength="30" />
+           </p>
+           <p>Password:
+            <input type="password" name="password" size="15" 
+            maxlength="30" />
+           </p>
+    </form> -->
+    <form action="http://www.example.com/profile.php">
+        <p>Username:
+            <input type="text" name="username" size="15" 
+            maxlength="30" placeholder="username" />
+           </p>
+           <p>Password:
+            <input type="password" name="password" size="15" 
+            maxlength="30" placeholder="password" />
+           </p>
+           
+        <p>What did you think of this gig?</p>
+ <textarea name="comments" cols="20" rows="4" placeholder="enter your comment....."></textarea>
+        <p>Please select your favorite genre:
+         <br />
+         <input type="radio" name="genre" value="rock" 
+         checked="checked" /> Rock
+         <input type="radio" name="genre" value="pop" /> 
+         Pop
+         <input type="radio" name="genre" value="jazz" /> 
+         Jazz
+        </p>
+    </form>
+       
+</body>
+</html>

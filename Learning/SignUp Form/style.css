@@ -1,0 +1,21 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+#signUp {
+    font-size: 30px;
+    font-weight: 600; /*  100 - 900 */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#text  {
+    font-size: 18px;
+    color: rgb(50, 48, 48);
+}
+

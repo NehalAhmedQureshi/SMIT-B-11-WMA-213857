@@ -1,0 +1,17 @@
+.header {
+    background-color: lightblue;
+}
+.navbar {
+    background-color: lightgreen;
+}
+.navbar ul {
+    list-style: none;
+}
+.navbar ul li {
+    display: inline-block;
+    margin-left: 2rem;
+}
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+}

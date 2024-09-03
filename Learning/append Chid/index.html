@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <button id="style">click</button>
+    <Button id="changeMode">
+        <p id="modeText">Change Dark Mode</p>
+    </Button>
+
+    <script type="module">
+
+        let body = document.querySelector("body")
+        let div = document.createElement("div")
+        div.setAttribute('id', 'header')
+        let p = document.createElement('p')
+        p.setAttribute('id', 'text')
+        let text = document.createTextNode('html write from javascript')
+        let button = document.querySelector('#style')
+
+        p.appendChild(text)
+        div.appendChild(p)
+        body.appendChild(div)
+
+        div.style.textAlign = 'center'
+        div.style.backgroundColor = 'lavender'
+        div.style.border = '2px solid black'
+        div.style.color = 'red'
+
+        // div.style.backgroundColor = 'red'
+        // div.style.color = 'white'
+        // div.style.border = '5px solid grey'
+
+        console.log(div.style.backgroundColor);
+        let changeStyle = () => {
+            if (div.style.backgroundColor === 'lavender') {
+                div.style.backgroundColor = 'red'
+                div.style.color = 'black'
+                div.style.border = '5px solid grey'
+            } else {
+                div.style.backgroundColor = 'lavender'
+                div.style.border = '2px solid grey'
+            }
+        }
+        let mode = document.querySelector("#changeMode")
+        let modeText = document.querySelector("#modeText")
+
+        let changeText = () => {
+            if (modeText.innerHTML === 'Change Dark Mode') {
+                modeText.innerHTML = 'Change Light Mode';
+                body.style.backgroundColor = 'black'
+                div.style.color = 'white'
+                div.style.backgroundColor = 'grey'
+            } else {
+                modeText.innerHTML = 'Change Dark Mode'
+                body.style.backgroundColor = 'white';
+                div.style.color = 'black';
+                div.style.backgroundColor = 'lavender';
+            }
+        }
+
+        console.log(modeText);
+
+        mode.addEventListener('click', changeText)
+        button.addEventListener('mouseover', changeStyle)
+    </script>
+</body>
+
+</html>
