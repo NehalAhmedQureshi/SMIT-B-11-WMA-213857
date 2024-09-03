@@ -6,10 +6,8 @@
 1. components
           - [vercel](https://react-henna-six.vercel.app/)
 1. hooks
-          - i-useState 
-          -[BY-VERSEL](https://react-01-usestate.vercel.app/)
-          - ii-useEffect 
-          -[BY-VERSEL](https://react-weatherapp-lime.vercel.app/)
+   - i-useState-[BY-VERSEL](https://react-01-usestate.vercel.app/)
+   - ii-useEffect-[BY-VERSEL](https://react-weatherapp-lime.vercel.app/)
 1. hooksRevision
 - i-useState
 - [cards-adder](https://cards-adder.vercel.app/)
