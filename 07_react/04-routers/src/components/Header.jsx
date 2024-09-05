@@ -20,8 +20,8 @@ export default function App() {
   ];
 
   return (
-    <Navbar className="w-full border-3  border-slate-700" onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent className=" border-2 border-red-200">
+    <Navbar className="border-3 border-slate-700" onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent className="border-2 border-red-200">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
