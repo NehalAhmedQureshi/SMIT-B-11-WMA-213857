@@ -20,8 +20,8 @@ export default function App() {
   ];
 
   return (
-    <Navbar className="border-3 border-slate-700" onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent className="border-2 border-red-200">
+    <Navbar className="bg-slate-300 w-full m-0" onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent className="">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
@@ -32,7 +32,7 @@ export default function App() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden border-2 border-red-200 sm:flex gap-9" justify="center">
+      <NavbarContent className="sm:flex gap-9" justify="center">
         <NavbarItem isActive>
           <Link  href="#">
             Features

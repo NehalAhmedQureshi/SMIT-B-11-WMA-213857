@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from './components/header'
 import Home from './pages/Home'
 import SignUp from './pages/Signup'
 import './app.css'
@@ -13,7 +12,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Header />
     <Routes>
       <Route path={'/'} element={<Home/>} />
       <Route path={'/Signup'} element={<SignUp/>} />
