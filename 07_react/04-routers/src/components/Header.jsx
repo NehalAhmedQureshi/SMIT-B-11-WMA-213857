@@ -1,7 +1,8 @@
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent,NavbarMenuToggle,NavbarMenu,NavbarMenuItem, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import { useState } from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 
-import {AcmeLogo} from "./AcmeLogo.jsx";
+import { AcmeLogo } from "./AcmeLogo.jsx";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -18,6 +19,7 @@ export default function App() {
     "Help & Feedback",
     "Log Out",
   ];
+  const [isActive, setIsActive] = useState(null)
 
   return (
     <Navbar className="bg-slate-300 w-full m-0" onMenuOpenChange={setIsMenuOpen}>
@@ -26,31 +28,33 @@ export default function App() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">Nehal Supermart</p>
-        </NavbarBrand>
+        <Link href="/" color ='foreground'>
+          <NavbarBrand>
+            <AcmeLogo />
+            <p className="font-bold text-inherit">Nehal Supermart</p>
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className="sm:flex gap-9" justify="center">
         <NavbarItem isActive>
-          <Link  href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link color="foreground" href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+            Contact Us
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive >
+          <Link color="foreground" href="#" aria-current="page">
+            About Us
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive >
+          <Link color="foreground" href="/signin">
+            LogIn
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent as="div" justify="end">
-        <Dropdown placement="bottom-end">
+      {/* <NavbarContent as="div" justify="end">
+        <Dropdown  placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -59,7 +63,7 @@ export default function App() {
               color="primary"
               name="Nehal Ahmed Qureshi"
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -76,7 +80,7 @@ export default function App() {
             <DropdownItem key="logout" color="danger">Log Out</DropdownItem>
           </DropdownMenu>
         </Dropdown>
-      </NavbarContent>
+      </NavbarContent> */}
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
