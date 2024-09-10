@@ -1,9 +1,10 @@
-import { Input } from "@nextui-org/react";
+import { Input , Link } from "@nextui-org/react";
 import { useState } from "react";
 import { Button } from "@nextui-org/react";
 import { auth, createUserWithEmailAndPassword } from "../firebase.js"
 
-export default function SignUp() {
+function Signup() {
+  console.log(window.location.path)
   // * show or hide password
   const [type, setType] = useState("password");
   const showPassword = (e) => {
@@ -14,13 +15,13 @@ export default function SignUp() {
     }
   };
   // * getting email or password input value
-  const [passwordInput, setPasswordInput] = useState(null)
-  const [password, setPassword] = useState(null)
-  console.log("🚀 ~ SignUp ~ password:", password)
-  // console.log("🚀 ~ SignUp ~ passwor--d:", passwordInput)
-  const [emailInput, setEmailInput] = useState(null)
-  const [email, setEmail] = useState(null)
-  console.log("🚀 ~ SignUp ~ email:", email)
+  // const [passwordInput, setPasswordInput] = useState(null)
+  // const [password, setPassword] = useState(null)
+  // console.log("🚀 ~ SignUp ~ password:", password)
+  // // console.log("🚀 ~ SignUp ~ passwor--d:", passwordInput)
+  // const [emailInput, setEmailInput] = useState(null)
+  // const [email, setEmail] = useState(null)
+  // console.log("🚀 ~ SignUp ~ email:", email)
   // console.log("🚀 ~ SignUp ~ email---:", emailInput)
 
 
@@ -38,11 +39,11 @@ export default function SignUp() {
   //   });
 
   return (
-    <div className="flex justify-center h-screen items-center main box-border border-2 border-black max-w-full m-0 rounded-xl max-sm:px-2">
-      <form className="lg:w-2/6 md:w-2/5 sm:w-3/5 sm:h-2/3 h-3/5 hover:shadow-slate-700 max-sm:m-0 flex flex-col gap-4 items-center justify-center p-10 border-black border-3  bg-blue-600 rounded-3xl  transition-shadow shadow-lg signUpForm">
-        <h1 className="lg:text-4xl text-3xl font-semibold font-serif mb-6">SignUp</h1>
+    <div className="flex w-full h-auto justify-center border-2 py-6 border-black items-center">
+      <form className="flex flex-col signUpForm bg-slate-300  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center">
+        <h1 className="text-gray-700 font-sans mb-5 text-2xl font-semibold">SignUp</h1>
         <Input
-          className="invalid:text-red-600"
+          className=""
           size="md"
           type="email"
           label="Email"
@@ -58,37 +59,40 @@ export default function SignUp() {
           placeholder="Enter your password"
           onChange={(e) => setPasswordInput(e.target.value)}
         />
-        <div className="showPassword flex gap-2 font-bold active:text-blue-900  hover:text-blue-800">
+        <div className="showPassword flex flex-row items-center justify-center gap-2 font-semibold font-sans">
           <input type="checkbox" id="showPassword" onChange={showPassword} />
-          <label htmlFor="showPassword" className="">Show Password</label>
+          <label htmlFor="showPassword" className="text-blue-600 hover:text-blue-800 active:text-blue-500">Show Password</label>
         </div>
-        <Button className="bg-blue-800 text-white font-medium text-lg rounded-full"
-          onClick={(e) => {
-            if (passwordInput && emailInput) {
-              setEmail(emailInput)
-              setPassword(passwordInput)
-              console.log(auth)
-              createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                  // Signed up 
-                  const user = userCredential.user;
-                  console.log("🚀 ~ .then ~ user:", user)
-                  alert("signup")
-                  // ...
-                })
-                .catch((error) => {
-                  const errorCode = error.code;
-                  console.log("🚀 ~ SignUp ~ errorCode:", errorCode)
-                  const errorMessage = error.message;
-                  console.log("🚀 ~ SignUp ~ errorMessage:", errorMessage)
-                  alert("error")
-                  // ..
-                });
-            }
-          }
-          }
+        <Button className="bg-gray-100 w-1/4 text-blue-600 text-medium font-semibold font-sans hover:bg-blue-600 hover:text-white transition-all ease-in-out delay-200"
+          // onClick={(e) => {
+          //   if (passwordInput && emailInput) {
+          //     setEmail(emailInput)
+          //     setPassword(passwordInput)
+          //     console.log(auth)
+          //     createUserWithEmailAndPassword(auth, email, password)
+          //       .then((userCredential) => {
+          //         // Signed up 
+          //         const user = userCredential.user;
+          //         console.log("🚀 ~ .then ~ user:", user)
+          //         alert("signup")
+          //         // ...
+          //       })
+          //       .catch((error) => {
+          //         const errorCode = error.code;
+          //         console.log("🚀 ~ SignUp ~ errorCode:", errorCode)
+          //         const errorMessage = error.message;
+          //         console.log("🚀 ~ SignUp ~ errorMessage:", errorMessage)
+          //         alert("error")
+          //         // ..
+          //       });
+          //   }
+          // }
+          // }
         >SignUp</Button>
+        <Link className='hover:text-blue-900 active:text-blue-600 font-sans font-semibold' href='/auth/signin'>Already have an account ?</Link>
+        {/* <Link className='hover:text-blue-900 active:text-blue-600 font-sans font-semibold' href='/auth'>Go back</Link> */}
       </form>
     </div>
   );
 }
+export default Signup

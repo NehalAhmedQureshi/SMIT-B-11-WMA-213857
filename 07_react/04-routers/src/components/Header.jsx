@@ -6,6 +6,13 @@ import { AcmeLogo } from "./AcmeLogo.jsx";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  console.log(window.location.pathname)
+  const [authientication,setAuthientication] = useState(null)
+  // if (window.location.pathname === '/auth'){
+  //   setAuthientication("")
+  // }else {
+  //   console.log("eror")
+  // }
 
   const menuItems = [
     "Profile",
@@ -19,10 +26,10 @@ export default function App() {
     "Help & Feedback",
     "Log Out",
   ];
-  const [isActive, setIsActive] = useState(null)
+  // const [isActive, setIsActive] = useState(null)
 
   return (
-    <Navbar className="bg-slate-300 w-full m-0" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar className="bg-slate-300 w-full m-0 border-3 border-gray-400" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className="">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -36,9 +43,9 @@ export default function App() {
         </Link>
       </NavbarContent>
 
-      <NavbarContent className="sm:flex gap-9" justify="center">
+      <NavbarContent className="sm:flex gap-9 hidden" justify="center">
         <NavbarItem isActive>
-          <Link color="foreground" href="#">
+          <Link  color="foreground" href="#">
             Contact Us
           </Link>
         </NavbarItem>
@@ -48,8 +55,8 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive >
-          <Link color="foreground" href="/signin">
-            LogIn
+          <Link color={authientication} href="/auth">
+            Authientication
           </Link>
         </NavbarItem>
       </NavbarContent>
