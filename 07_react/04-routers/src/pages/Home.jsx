@@ -1,12 +1,25 @@
 // import Header from '../components/header'
+import { useContext } from "react";
 import { Button } from "@nextui-org/react"
+import { UserContext } from "../context/userContext";
 
 function Home() {
      // console.log(window.location)
+     // * import context 
+     const { user } = useContext(UserContext);
+     console.log(user)
      return (
           <div className='w-full h-auto'>
                <div className="header w-full flex flex-col bg-slate-200 border-2 border-black gap-5 justify-center items-center ">
-                    <div className="content w-2/4">
+                    <div className="userProfile text-center">
+                         {user.isLogin ? (
+                              <h1 className="text-2xl  text-center font-semibold my-4 font-mono">
+                                   Welcome {`${user?.username}👋` }
+                              </h1>
+                         ) : 'User Not Found'}
+
+                    </div>
+                    <div className="content text-center w-2/4">
                          <div className="heading text-4xl font-serif m-4 font-bold">
                               Nehal Supermart
                          </div>

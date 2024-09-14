@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import Home from './pages/Home'
-import Signup from './pages/Signup'
-import './app.css'
+import Signup from './pages/auth/Signup'
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import Signin from './pages/Signin';
-import Auth from './pages/Auth';
-import Header from './components/header';
+import Signin from './pages/auth/Signin';
+import Auth from './pages/auth/Auth';
+import Header from './components/Header';
+import Cart from './pages/Cart';
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <Header />
       <Routes>
         <Route path={'/'} element={<Home />} />
+        <Route path={'/cart'} element={<Cart />} />
+        <Route path={'/profile'} element={<Profile />} />
         <Route path='/auth'>
           <Route index element={<Auth />} />
           <Route path={'/auth/signup'} element={<Signup />} />
