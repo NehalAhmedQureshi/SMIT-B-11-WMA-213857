@@ -8,7 +8,8 @@ import Auth from './pages/auth/Auth';
 import Header from './components/Header';
 import Cart from './pages/Cart';
 import Profile from './pages/Profile';
-
+import Card from './pages/Cards';
+import Product from './pages/Prodectdetail';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
         <Route path={'/'} element={<Home />} />
         <Route path={'/cart'} element={<Cart />} />
         <Route path={'/profile'} element={<Profile />} />
+        <Route path='/product/' element={<Card />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path='/auth'>
           <Route index element={<Auth />} />
           <Route path={'/auth/signup'} element={<Signup />} />

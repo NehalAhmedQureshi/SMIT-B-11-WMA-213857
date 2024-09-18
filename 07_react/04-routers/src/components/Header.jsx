@@ -86,8 +86,8 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link color="foreground" href="#" aria-current="page">
-            About Us
+          <Link color="foreground" href="/product/" aria-current="page">
+            Products
           </Link>
         </NavbarItem>
         {!user?.isLogin ? (
