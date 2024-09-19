@@ -31,8 +31,8 @@ export default function Signin() {
       const result = await signInWithEmailAndPassword(auth , email , password )
       setErrormsg('')
       console.log("user => ", result.user)
-      setLoading(false)
       navigate('/product/')
+      setLoading(false)
     } catch (error) {
       console.log('error' , error , 'error msg =>',error.msg)
       setLoading(false) 
