@@ -203,7 +203,7 @@ function Product() {
                 </span>
                 <Button
                   // onClick={() => addItemToCart({ ...productInfo, quantity: 1 })}
-                  onClick={addItemToCart({ ...productInfo, quantity: 1 })}
+                  // onClick={addItemToCart({ ...productInfo, quantity: 1 })}
                   icon={<ShoppingCartOutlined />}>
                   {/* {isItemAdded(id) ? `Item Added (${isItemAdded(id).quantity})` : 'Add To Cart'} */}
                 </Button>
