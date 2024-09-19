@@ -4,14 +4,18 @@ import { useParams } from "react-router";
 import { Button } from "antd";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 // import { CartContext } from "../context/CartContext";
+import NotFound from "./404NotFound";
+import { doc, setDoc, updateDoc , getDoc } from "firebase/firestore";
+import { db } from '../utils/firebase'
+import { UserContext } from "../context/userContext";
 
 function Product() {
-//   const { addItemToCart, isItemAdded } = useContext(CartContext)
+  //   const { addItemToCart, isItemAdded } = useContext(CartContext)
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     setLoading(true);
     setNotFound(false);
@@ -27,6 +31,17 @@ function Product() {
         setNotFound(true), setLoading(false);
       });
   }, [id]);
+  const addItemToCart =async (productInfo) => {
+    console.log("🚀 ~ addItemToCart ~ productInfo:", productInfo)
+    try {
+      const docRef = doc(db, 'users', user.uid);
+      const document =await getDoc(docRef)
+      console.log("🚀 ~ addItemToCart ~ document:", document.data())
+
+    } catch (errorMsg) {
+      console.log("🚀 ~ addItemToCart ~ errorMsg:", errorMsg)
+    }
+  }
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -34,13 +49,13 @@ function Product() {
         {loading ? (
           <h1 className="text-center text-2xl">Loading ....</h1>
         ) : notFound ? (
-          <NotFound title={"No Product Against this ID"} />
+          <NotFound />
         ) : (
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
               className="lg:w-2/6 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src={productInfo.images?productInfo.images:productInfo.category.image}
+              src={productInfo.images ? productInfo.images : productInfo.category.image}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -187,7 +202,8 @@ function Product() {
                   ${productInfo.price}
                 </span>
                 <Button
-                  onClick={() => addItemToCart({ ...productInfo, quantity: 1 })}
+                  // onClick={() => addItemToCart({ ...productInfo, quantity: 1 })}
+                  onClick={addItemToCart({ ...productInfo, quantity: 1 })}
                   icon={<ShoppingCartOutlined />}>
                   {/* {isItemAdded(id) ? `Item Added (${isItemAdded(id).quantity})` : 'Add To Cart'} */}
                 </Button>

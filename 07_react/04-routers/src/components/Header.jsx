@@ -49,15 +49,13 @@ export default function App() {
 
   const menuItems = [
     "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "Products",
+    "Contact Us",
+    user?.isLogin ? (
+      "Log Out"
+    ): (
+      "Sign In"
+    )
   ];
   // const [isActive, setIsActive] = useState(null)
 
@@ -82,7 +80,7 @@ export default function App() {
       <NavbarContent className="sm:flex gap-9 hidden" justify="center">
         <NavbarItem isActive>
           <Link color="foreground" href="#">
-          Contact Us
+            Contact Us
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
@@ -117,7 +115,7 @@ export default function App() {
                 color="primary"
                 name={user?.username}
                 size="sm"
-                // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -169,12 +167,15 @@ export default function App() {
                 index === 5
                   ? "primary"
                   : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
+                    ? user?.isLogin ? "danger" : "primary"
+                    : "foreground"
               }
               className="w-full"
               href="#"
               size="lg"
+              onClick={
+                index === menuItems.length -1 ? user?.isLogin? handleSignOut : navigate("/auth/signin") : ""
+              }
             >
               {item}
             </Link>

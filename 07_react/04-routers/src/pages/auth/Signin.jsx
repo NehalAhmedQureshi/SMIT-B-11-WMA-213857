@@ -6,7 +6,6 @@ import { setLogLevel } from "firebase/firestore/lite";
 import { useNavigate } from "react-router";
 import { auth } from "../../utils/firebase";
 
-
 export default function Signin() {
   // console.log(window.location.pathname);
   // * states
@@ -33,7 +32,7 @@ export default function Signin() {
       setErrormsg('')
       console.log("user => ", result.user)
       setLoading(false)
-      navigate('/')
+      navigate('/product/')
     } catch (error) {
       console.log('error' , error , 'error msg =>',error.msg)
       setLoading(false) 
