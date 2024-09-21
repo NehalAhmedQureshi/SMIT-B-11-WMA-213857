@@ -30,11 +30,11 @@ export default function Signin() {
       setLoading(true)
       const result = await signInWithEmailAndPassword(auth , email , password )
       setErrormsg('')
-      console.log("user => ", result.user)
+      // console.log("user => ", result.user)
       navigate('/product/')
       setLoading(false)
     } catch (error) {
-      console.log('error' , error , 'error msg =>',error.msg)
+      // console.log('error' , error , 'error msg =>',error.msg)
       setLoading(false) 
       setErrormsg('Invalid User Email or Password')
     }

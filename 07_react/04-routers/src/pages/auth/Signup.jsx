@@ -30,7 +30,7 @@ function Signup() {
     try{
       setLoading(true)
       const result =await createUserWithEmailAndPassword(auth , email , password)
-      console.log("🚀 ~ signUp ~ result:", result)
+      // console.log("🚀 ~ signUp ~ result:", result)
       // alert(result.user.uid)
       const docRef = doc(db , 'users' , result.user.uid);
       const docAdd = setDoc(docRef  , {
@@ -40,8 +40,8 @@ function Signup() {
       })
       navigate('/')
     }catch(error){
-      console.log('error',error)
-      console.log('error msg -> ' , error.msg)
+      // console.log('error',error)
+      // console.log('error msg -> ' , error.msg)
     }
   }
 

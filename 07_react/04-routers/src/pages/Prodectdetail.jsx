@@ -24,12 +24,12 @@ function Product() {
     fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data=>", data);
+        // console.log("data=>", data);
         setProductInfo(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setNotFound(true), setLoading(false);
       });
   }, [id]);

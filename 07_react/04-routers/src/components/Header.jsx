@@ -126,9 +126,9 @@ export default function App() {
                 as="button"
                 className="transition-transform"
                 color="primary"
-                name={user?.username}
+                name={user.username}
                 size="sm"
-              // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={user?.profile}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -190,7 +190,7 @@ export default function App() {
               size="lg"
               onClick={
                 index === menuItems.length -1 ? user?.isLogin? handleSignOut : ()=> navigate("/auth/signin") :
-                index === 2 ?()=> navigate('/cart'):""
+                index === 2 ?()=> navigate('/cart'):index === 0 ? ()=> navigate("/profile"):index === 1 ? ()=>navigate('/product/'):''
               }
             >
               {item}
