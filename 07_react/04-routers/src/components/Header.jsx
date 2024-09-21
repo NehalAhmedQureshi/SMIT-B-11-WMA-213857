@@ -18,6 +18,7 @@ import {
 import { signOut } from "firebase/auth";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { UserContext } from "../context/userContext.jsx";
+import { CartContext } from "../context/cartContext.jsx";
 import { Badge, Button } from "antd";
 import {
   LogoutOutlined,
@@ -27,6 +28,8 @@ import {
 } from "@ant-design/icons";
 import { auth } from "../utils/firebase.js";
 import { useNavigate } from "react-router";
+// import { useContext } from "react";
+
 export default function App() {
   // console.log(window.location.pathname)
   // *import states
@@ -34,6 +37,7 @@ export default function App() {
   const [authientication, setAuthientication] = useState(null);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const { cartItems } = useContext(CartContext)
 
   // if (window.location.pathname === '/auth'){
   //   setAuthientication("")
@@ -50,6 +54,7 @@ export default function App() {
   const menuItems = [
     "Profile",
     "Products",
+    "My Cart",
     "Contact Us",
     user?.isLogin ? (
       "Log Out"
@@ -61,7 +66,7 @@ export default function App() {
 
   return (
     <Navbar
-      className="bg-slate-100 w-full m-0 border-3 border-gray-400"
+      className="bg-slate-100 w-full m-0"
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent className="">
@@ -88,6 +93,14 @@ export default function App() {
             Products
           </Link>
         </NavbarItem>
+        {user?.isLogin? (
+          <NavbarItem isActive>
+          <Link color="foreground" href="/cart/" aria-current="page">
+            My Cart
+          </Link>
+        </NavbarItem>
+        ):''
+        }
         {!user?.isLogin ? (
           <NavbarItem isActive>
             <Link color={authientication} href="/auth/signin">
@@ -95,7 +108,7 @@ export default function App() {
                 className="mx-2"
                 shape="circle"
                 icon={<LoginOutlined />}
-                onClick={navigate("/auth/signin")}
+                onClick={()=>navigate("/auth/signin")}
                 type="default"
               ></Button>
             </Link>
@@ -126,7 +139,9 @@ export default function App() {
               <DropdownItem key="myProfile" className="">
                 <Link href="/profile" className="text-black">My Profile</Link>
               </DropdownItem>
-              {/* <DropdownItem key="team_settings">Team Settings</DropdownItem> */}
+              <DropdownItem key="team_cart" >
+                <Link href="/cart" className="text-black">My Cart</Link>
+              </DropdownItem>
               {/* <DropdownItem key="analytics">Analytics</DropdownItem> */}
               {/* <DropdownItem key="system">System</DropdownItem> */}
               {/* <DropdownItem key="configurations">Configurations</DropdownItem> */}
@@ -146,7 +161,7 @@ export default function App() {
             </DropdownMenu>
           </Dropdown>
           <Link href="/cart">
-            <Badge count={0} showZero>
+            <Badge count={cartItems.length} showZero>
               <Button
                 shape="circle"
                 icon={<ShoppingCartOutlined />}
@@ -174,7 +189,8 @@ export default function App() {
               href="#"
               size="lg"
               onClick={
-                index === menuItems.length -1 ? user?.isLogin? handleSignOut : navigate("/auth/signin") : ""
+                index === menuItems.length -1 ? user?.isLogin? handleSignOut : ()=> navigate("/auth/signin") :
+                index === 2 ?()=> navigate('/cart'):""
               }
             >
               {item}

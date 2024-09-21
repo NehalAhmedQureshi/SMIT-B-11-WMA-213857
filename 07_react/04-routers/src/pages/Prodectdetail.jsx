@@ -3,14 +3,16 @@ import { useParams } from "react-router";
 // import NotFound from "./NotFound";
 import { Button } from "antd";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-// import { CartContext } from "../context/CartContext";
+import { CartContext } from "../context/cartContext";
 import NotFound from "./404NotFound";
-import { doc, setDoc, updateDoc , getDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from '../utils/firebase'
 import { UserContext } from "../context/userContext";
+import { Carousel } from "@material-tailwind/react";
+
 
 function Product() {
-  //   const { addItemToCart, isItemAdded } = useContext(CartContext)
+  const { addItemToCart } = useContext(CartContext)
   const { id } = useParams();
   const [productInfo, setProductInfo] = useState({});
   const [loading, setLoading] = useState(true);
@@ -31,17 +33,17 @@ function Product() {
         setNotFound(true), setLoading(false);
       });
   }, [id]);
-  const addItemToCart =async (productInfo) => {
-    console.log("🚀 ~ addItemToCart ~ productInfo:", productInfo)
-    try {
-      const docRef = doc(db, 'users', user.uid);
-      const document =await getDoc(docRef)
-      console.log("🚀 ~ addItemToCart ~ document:", document.data())
+  // const addItemToCart =async (productInfo) => {
+  //   console.log("🚀 ~ addItemToCart ~ productInfo:", productInfo)
+  //   try {
+  //     const docRef = doc(db, 'carts', user.uid);
+  //     const document =await setDoc(docRef , )
+  //     console.log("🚀 ~ addItemToCart ~ document:", document.data())
 
-    } catch (errorMsg) {
-      console.log("🚀 ~ addItemToCart ~ errorMsg:", errorMsg)
-    }
-  }
+  //   } catch (errorMsg) {
+  //     console.log("🚀 ~ addItemToCart ~ errorMsg:", errorMsg)
+  //   }
+  // }
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -51,12 +53,24 @@ function Product() {
         ) : notFound ? (
           <NotFound />
         ) : (
-          <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <img
-              alt="ecommerce"
-              className="lg:w-2/6 w-full lg:h-auto h-64 object-cover object-center rounded"
-              src={productInfo.images ? productInfo.images : productInfo.category.image}
-            />
+          <div className="lg:w-4/5  mx-auto flex flex-wrap">
+            <Carousel transition={{ duration: 2 }} className="rounded-xl md:w-2/3 lg:w-2/4">
+              <img
+                src={productInfo.images[0]}
+                alt="image 1"
+                className="h-full w-full object-cover"
+              />
+              <img
+                src={productInfo.images[1]}
+                alt="image 2"
+                className="h-full w-full object-cover"
+              />
+              <img
+                src={productInfo.images[2]}
+                alt="image 3"
+                className="h-full w-full object-cover"
+              />
+            </Carousel>
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 {productInfo.title}
@@ -202,7 +216,7 @@ function Product() {
                   ${productInfo.price}
                 </span>
                 <Button
-                  // onClick={() => addItemToCart({ ...productInfo, quantity: 1 })}
+                  onClick={() => addItemToCart({ ...productInfo, quantity: 1 })}
                   // onClick={addItemToCart({ ...productInfo, quantity: 1 })}
                   icon={<ShoppingCartOutlined />}>
                   {/* {isItemAdded(id) ? `Item Added (${isItemAdded(id).quantity})` : 'Add To Cart'} */}
