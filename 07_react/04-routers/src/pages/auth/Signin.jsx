@@ -31,17 +31,17 @@ export default function Signin() {
       const result = await signInWithEmailAndPassword(auth , email , password )
       setErrormsg('')
       // console.log("user => ", result.user)
-      navigate('/product/')
+      navigate('/')
       setLoading(false)
     } catch (error) {
-      // console.log('error' , error , 'error msg =>',error.msg)
+      console.log('error' , error , 'error msg =>',error.message)
       setLoading(false) 
       setErrormsg('Invalid User Email or Password')
     }
   }
   return (
-    <div className="flex w-full h-auto justify-center border-2 py-6 border-black items-center">
-      <form className="flex flex-col  bg-slate-300  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center signinForm">
+    <div className="flex w-full h-screen justify-center py-6  items-center">
+      <form className="flex flex-col w-4/5 bg-blue-gray-100  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center signinForm">
         <h1 className="text-gray-700 font-sans mb-5 text-2xl font-semibold">
           LogIn
         </h1>

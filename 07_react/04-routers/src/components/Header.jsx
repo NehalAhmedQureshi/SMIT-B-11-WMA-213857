@@ -89,7 +89,7 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link color="foreground" href="/product/" aria-current="page">
+          <Link color="foreground" href="/" aria-current="page">
             Products
           </Link>
         </NavbarItem>
@@ -190,7 +190,7 @@ export default function App() {
               size="lg"
               onClick={
                 index === menuItems.length -1 ? user?.isLogin? handleSignOut : ()=> navigate("/auth/signin") :
-                index === 2 ?()=> navigate('/cart'):index === 0 ? ()=> navigate("/profile"):index === 1 ? ()=>navigate('/product/'):''
+                index === 2 ?()=> navigate('/cart'):index === 0 ? ()=> navigate("/profile"):index === 1 ? ()=>navigate('/'):''
               }
             >
               {item}

@@ -46,8 +46,8 @@ function Signup() {
   }
 
   return (
-    <div className="flex w-full h-auto justify-center border-2 py-6 border-black items-center">
-      <form className="flex flex-col signUpForm bg-slate-300  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center">
+    <div className="flex w-full h-screen justify-center py-6  items-center">
+      <form className="flex flex-col signUpForm bg-blue-gray-100 w-4/5  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center">
         <h1 className="text-gray-700 font-sans mb-5 text-2xl font-semibold">SignUp</h1>
         <Input
           size="md"
