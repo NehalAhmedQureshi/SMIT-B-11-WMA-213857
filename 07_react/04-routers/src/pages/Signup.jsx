@@ -1,9 +1,10 @@
-import { Input , Link } from "@nextui-org/react";
+import { Input, Link } from "@nextui-org/react";
 import { useState } from "react";
 import { Button } from "@nextui-org/react";
 import { auth, createUserWithEmailAndPassword } from "../firebase.js"
 
 function Signup() {
+  console.log('auth =>',auth)
   console.log(window.location.path)
   // * show or hide password
   const [type, setType] = useState("password");
@@ -15,28 +16,28 @@ function Signup() {
     }
   };
   // * getting email or password input value
-  // const [passwordInput, setPasswordInput] = useState(null)
-  // const [password, setPassword] = useState(null)
-  // console.log("🚀 ~ SignUp ~ password:", password)
-  // // console.log("🚀 ~ SignUp ~ passwor--d:", passwordInput)
-  // const [emailInput, setEmailInput] = useState(null)
-  // const [email, setEmail] = useState(null)
-  // console.log("🚀 ~ SignUp ~ email:", email)
-  // console.log("🚀 ~ SignUp ~ email---:", emailInput)
+  const [passwordInput, setPasswordInput] = useState(null)
+  const [password, setPassword] = useState(null)
+  console.log("🚀 ~ SignUp ~ password:", password)
+  // console.log("🚀 ~ SignUp ~ passwor--d:", passwordInput)
+  const [emailInput, setEmailInput] = useState(null)
+  const [email, setEmail] = useState(null)
+  console.log("🚀 ~ SignUp ~ email:", email)
+  console.log("🚀 ~ SignUp ~ email---:", emailInput)
 
 
   // * sign up user 
-  // createUserWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed up 
-  //     const user = userCredential.user;
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     // ..
-  //   });
+  const signUp = async() => {
+    try{
+      console.log(auth)
+      const result = await createUserWithEmailAndPassword(auth, email, password)
+      console.log("user sign in ho gaya hy is id se => " , user.uid)
+      console.log('result =>' , result)
+    }catch(error){
+      console.log('error =>',error)
+    }
+    
+  }
 
   return (
     <div className="flex w-full h-auto justify-center border-2 py-6 border-black items-center">
@@ -64,30 +65,7 @@ function Signup() {
           <label htmlFor="showPassword" className="text-blue-600 hover:text-blue-800 active:text-blue-500">Show Password</label>
         </div>
         <Button className="bg-gray-100 w-1/4 text-blue-600 text-medium font-semibold font-sans hover:bg-blue-600 hover:text-white transition-all ease-in-out delay-200"
-          // onClick={(e) => {
-          //   if (passwordInput && emailInput) {
-          //     setEmail(emailInput)
-          //     setPassword(passwordInput)
-          //     console.log(auth)
-          //     createUserWithEmailAndPassword(auth, email, password)
-          //       .then((userCredential) => {
-          //         // Signed up 
-          //         const user = userCredential.user;
-          //         console.log("🚀 ~ .then ~ user:", user)
-          //         alert("signup")
-          //         // ...
-          //       })
-          //       .catch((error) => {
-          //         const errorCode = error.code;
-          //         console.log("🚀 ~ SignUp ~ errorCode:", errorCode)
-          //         const errorMessage = error.message;
-          //         console.log("🚀 ~ SignUp ~ errorMessage:", errorMessage)
-          //         alert("error")
-          //         // ..
-          //       });
-          //   }
-          // }
-          // }
+        onClick={signUp}
         >SignUp</Button>
         <Link className='hover:text-blue-900 active:text-blue-600 font-sans font-semibold' href='/auth/signin'>Already have an account ?</Link>
         {/* <Link className='hover:text-blue-900 active:text-blue-600 font-sans font-semibold' href='/auth'>Go back</Link> */}
