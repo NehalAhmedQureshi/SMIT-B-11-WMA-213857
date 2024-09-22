@@ -34,7 +34,7 @@ export default function Signin() {
       navigate('/')
       setLoading(false)
     } catch (error) {
-      console.log('error' , error , 'error msg =>',error.message)
+      // console.log('error' , error , 'error msg =>',error.message)
       setLoading(false) 
       setErrormsg('Invalid User Email or Password')
     }

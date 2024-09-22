@@ -8,7 +8,7 @@ function Home() {
      // console.log(window.location)
      // * import context 
      const { user } = useContext(UserContext);
-     console.log(user)
+     // console.log(user)
      return (
           <div className='w-full h-auto bg-blue-gray-50'>
                <div className="header w-full flex flex-col bg-slate-200 gap-5 justify-center items-center ">

@@ -1,6 +1,6 @@
 import { Link } from "@nextui-org/react"
 function Auth() {
-     console.log(window.location.pathname)
+     // console.log(window.location.pathname)
      return (
           <>
                <h1
