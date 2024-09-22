@@ -47,7 +47,7 @@ export default function Cards() {
                <div className="w-full cards flex flex-row flex-wrap justify-center items-center">
                {searched.map((data) => (
                     data?.title !== 'New Product' ? data?.title !== "eerr" ? data?.description !== 'tra gop' ? data?.description !== "prueba 58" ? data?.description !== "Hello" ?
-                    <Link key={data.id} className="w-5/6 md:w-96 flex justify-center items-center" to={`/${data.id}`}>
+                    <Link key={data.id} className="w-5/6 md:w-96 flex justify-center items-center" to={`/product/${data.id}`}>
                          <Card className="w-11/12 md:w-96 m-4">
                               <CardHeader shadow={false} floated={false} className="h-60">
                                    <img
