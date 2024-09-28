@@ -3,6 +3,7 @@ import Home from './pages/Home/Home'
 import SignUp from './pages/Auth/SignUp'
 import LogIn from './pages/Auth/LogIn'
 import Cart from './pages/Home/Cart'
+import Header from './components/Header'
 
 function App() {
   return (
@@ -11,7 +12,10 @@ function App() {
         <Route index element={<LogIn />} />
         <Route path='signup' element={<SignUp />} />
       </Route>
-      <Route path={'/'} element={<Outlet />}>
+      <Route path={'/'} element={<>
+      <Header />
+      <Outlet />
+      </>}>
         <Route index element={<Home />} />
         <Route path='cart' element={<Cart />} />
       </Route>
