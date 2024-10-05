@@ -15,7 +15,7 @@ export default function ChatsHome() {
                          </div>
                     </div>
                     <div className="search relative flex items-center">
-                         <input type="text" placeholder="search" className="search text-sm w-full h-7 bg-slate-500 rounded-lg pl-11 active:border-none focus-visible:outline-none text-slate-50 placeholder:text-slate-100" />
+                         <input type="text" placeholder="search" className="search text-sm w-full h-7 bg-slate-500 rounded-lg pl-9 active:border-none focus-visible:outline-none text-slate-50 placeholder:text-slate-100 cursor-pointer" />
                          <div className="icon bg-slate-50 w-5 h-5 rounded-full absolute left-1"></div>
                     </div>
                     <div className="tags flex flex-row gap-1">

@@ -3,6 +3,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../../utils/firebase'
 import { Button, message } from "antd";
 import { doc, setDoc } from "firebase/firestore";
+import {useNavigate} from 'react-router-dom'
 
 
 // import { ProviderId } from "firebase/auth";
@@ -11,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 export default function LogIn() {
      // const auth = getAuth();
+     const navigate = useNavigate()
      const handleSignIn = async ()=> {
           const provider = new GoogleAuthProvider();
           provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -45,6 +47,9 @@ export default function LogIn() {
                // ...
           });}
      return (
-          <Button className="signIn" onClick={handleSignIn}>LogIn with Google</Button>
+          <div className="main w-full h-screen flex flex-col gap-4 justify-center items-center">
+               <Button className="signIn" onClick={handleSignIn}>LogIn with Google</Button>
+               <Button as='Link' href="/">Go back to Home</Button>
+          </div>
      )
 }
