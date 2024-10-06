@@ -42,7 +42,7 @@ export default function Header() {
                     />
                     <NavbarBrand>
                          {/* <AcmeLogo /> */}
-                         <p className="font-bold text-inherit">Bidding Store</p>
+                         <p className="font-bold text-inherit cursor-pointer">Bidding Store</p>
                     </NavbarBrand>
                </NavbarContent>
 

@@ -33,7 +33,7 @@ export default function AllProducts() {
                     <div className="heading text-center text-2xl">All Products</div>
                     <div className="products md:w-11/12 md:mx-auto w-full py-4 flex flex-wrap gap-8 justify-center">
                          {/* //* card */}
-                         <div className="product w-3/12  p-2 rounded-lg flex flex-col gap-3 hover:shadow-xl
+                         <div className="product w-3/12  p-2 rounded-lg flex flex-col gap-3 hover:shadow-medium
                     hover:transition-shadow cursor-pointer">
                               {/* //* img */}
                               <img src="#" alt="no image" className="img w-full h-40   rounded-xl" />
