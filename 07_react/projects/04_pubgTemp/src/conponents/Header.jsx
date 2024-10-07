@@ -1,12 +1,24 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { Button } from "antd";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
+import { auth } from "../utils/firebase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function App() {
+  const navigate = useNavigate()
+  const {user} = useContext(UserContext)
+  console.log(user.username)
+  const handleSignOut = async () => {
+    await signOut(auth);
+    navigate("/auth");
+  };
   return (
-    <Navbar shouldHideOnScroll>
+    <Navbar shouldHideOnScroll className="bg-slate-600 text-slate-200 border-b-2 border-slate-500">
       <NavbarBrand className="">
-        <p className="font-bold text-inherit text-xl">Hasnain Accounts</p>
+        <p className="font-bold text-inherit text-xl">{user?.username ? `${user.username.toUpperCase()}  ACCOUNTS` : "GUEST" } </p>
       </NavbarBrand>
 
       {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -59,9 +71,9 @@ export default function App() {
         </Dropdown> */}
 
 
-        <Button  color='danger' variant="solid">Add New</Button>
+        <Button color='danger' variant="solid">Add New</Button>
         <Button color='danger' variant="solid">Change</Button>
-        <Button as={Link} href='/auth' color='danger' variant="solid">SignIn</Button>
+        {user.isLogin ? <Button  color='danger' onClick={()=>{handleSignOut()}} variant="solid">Logout</Button> : <Button as={Link} href='/auth' color='danger' variant="solid">SignIn</Button>}
 
       </NavbarContent>
     </Navbar>

@@ -5,15 +5,21 @@ import './index.css'
 import { NextUIProvider } from '@nextui-org/react'
 import { BrowserRouter } from 'react-router-dom'
 import ThemeContextProvider from './context/ThemeContext.jsx'
+import UsernameProvider from './context/Username.jsx'
+import UserContextProvider from './context/userContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <NextUIProvider>
-        <ThemeContextProvider>
-          <App />
-        </ThemeContextProvider>
-      </NextUIProvider>
-    </BrowserRouter>
+    <UserContextProvider>
+      <UsernameProvider>
+        <BrowserRouter>
+          <NextUIProvider>
+            <ThemeContextProvider>
+              <App />
+            </ThemeContextProvider>
+          </NextUIProvider>
+        </BrowserRouter>
+      </UsernameProvider>
+    </UserContextProvider>
   </StrictMode>,
 )

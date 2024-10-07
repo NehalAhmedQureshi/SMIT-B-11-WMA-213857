@@ -1,15 +1,20 @@
 import { Input, Link } from "@nextui-org/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../../conponents/UsernameInput";
+import { Username } from "../../context/Username";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../utils/firebase";
 
 export default function Signin() {
      // console.log(window.location.pathname);
      // * states
+     const {username , setUsername} = useContext(Username)
+     // console.log("🚀 ~ Signin ~ username:", username)
      const [type, setType] = useState("password");
      const [isLoading, setLoading] = useState(false)
-     const [email, setEmail] = useState('')
+     // const [email, setEmail] = useState('')
      const [password, setPassword] = useState('')
      const [errorMsg, setErrormsg] = useState('')
      const navigate = useNavigate()
@@ -22,18 +27,21 @@ export default function Signin() {
                setType("password");
           }
      };
+     const email = `${username}@gmail.com`
      // * login function 
+     console.log("🚀 ~ Signin ~ email:", email)
      const logIn = async () => {
           try {
                setLoading(true)
                const result = await signInWithEmailAndPassword(auth, email, password)
                setErrormsg('')
                // console.log("user => ", result.user)
-               navigate('/')
                setLoading(false)
+               navigate('/')
           } catch (error) {
                // console.log('error' , error , 'error msg =>',error.message)
                setLoading(false)
+               console.log(error, 'error' , errorMsg , 'error msg')
                setErrormsg('Invalid User Email or Password')
           }
      }
@@ -45,16 +53,7 @@ export default function Signin() {
                          LogIn
                     </h1>
                     <h1 className=" text-red-600 font-semibold">{errorMsg ? errorMsg : null}</h1>
-                    <CustomInput
-                         // className=""
-                         // size="md"
-                         // type="text"
-                         // maxLength={20}
-                         // minLength={5}
-                         // label="Email"
-                         // placeholder="Enter your email"
-                         // onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <CustomInput />
                     <Input
                          id="password"
                          className=""

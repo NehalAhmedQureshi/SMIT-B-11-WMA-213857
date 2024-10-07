@@ -1,21 +1,27 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Input } from '@nextui-org/react';
+import { Username } from '../context/Username';
 
-function CustomInput() {
+function CustomInput({onchange}) {
      const [inputValue, setInputValue] = useState('');
      const [error, setError] = useState('');
+     const {username , setUsername} = useContext(Username)
+
+     // console.log(inputValue)
 
      const handleInputChange = (e) => {
           const value = e.target.value;
 
           // Regular expression to allow only lowercase letters, numbers, and special characters
-          const regex = /^[a-z0-9!@#$%^&*()_+={}\[\]:;"'<>,.?/\\~-]*$/;
+          // const regex = /^[a-z0-9!#$%^&*()_+={}\[\]:;"'<>,.?/\\~-]*$/;
+          const regex = /^[a-z0-9-_]*$/;
 
           if (regex.test(value)) {
                setInputValue(value);
+               setUsername(value)
                setError('');
           } else {
-               setError('Only lowercase letters, numbers, or special characters are allowed.');
+               setError('Only lowercase letters(a-z), numbers(0-9), or special characters(-_) are allowed.');
           }
      };
 
@@ -27,11 +33,13 @@ function CustomInput() {
                     onChange={handleInputChange}
                     status={error ? 'error' : 'default'}
                     size="md"
-                    id="password"
+                    id="username"
                     label="Username"
                     placeholder="Enter your username"
+                    maxLength={15}
+                    minLength={7}
                />
-               {error && <p color="error" className="mt-2">{error}</p>}
+               {error && <p className="mt-2 text-red-600 font-semibold">{error}</p>}
           </div>
      );
 }
