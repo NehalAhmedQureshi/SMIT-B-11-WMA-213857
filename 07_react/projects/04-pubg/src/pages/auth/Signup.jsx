@@ -11,8 +11,11 @@ import { Username } from "../../context/Username";
 function Signup() {
      // console.log(window.location.path)
      // * show or hide password
-     const {username} = useContext(Username)
+     const { username } = useContext(Username)
      const [type, setType] = useState("password");
+     const [errorMsg, setErrormsg] = useState('')
+     const {checkInternet , setCheckInternet} = useContext(CheckInternet)
+
      const showPassword = (e) => {
           if (e.target.checked === true) {
                setType("text");
@@ -45,8 +48,14 @@ function Signup() {
                navigate('/')
           } catch (error) {
                setLoading(false)
-               console.log('error',error)
-               console.log('error msg -> ' , error.msg)
+               // console.log('error', error)
+               // console.log('error msg -> ', error.msg)
+               setErrormsg('Invalid Username or Password')
+               setCheckInternet('online')
+               if(error.message === 'Firebase: Error (auth/network-request-failed).'){
+                    setErrormsg("Check your Internet Connection and Try Again")
+                    setCheckInternet('offline')
+               }
           }
      }
 
@@ -61,6 +70,8 @@ function Signup() {
           placeholder="Enter username"
           onChange={(e)=>setUsername(e.target.value)}
         /> */}
+                    <h1 className=" text-red-600 font-semibold">{errorMsg ? errorMsg : null}</h1>
+
                     <CustomInput />
                     <Input
                          id="password"
@@ -77,11 +88,14 @@ function Signup() {
                          <input type="checkbox" id="showPassword" onChange={showPassword} />
                          <label htmlFor="showPassword" className="text-blue-600 hover:text-blue-800 active:text-blue-500">Show Password</label>
                     </div>
-                    <Button className="bg-gray-100 w-1/4 text-blue-600 text-medium font-semibold font-sans hover:bg-blue-600 hover:text-white transition-all ease-in-out delay-200" onClick={signUp} disabled={isLoading}>{isLoading ? 'Loading...' : 'SignUp'}</Button>
+                    <Button className="bg-gray-100 w-1/4 text-blue-600 text-medium font-semibold font-sans hover:bg-blue-600 hover:text-white transition-all ease-in-out delay-200" onClick={()=>{
+                              username === '' || password === '' ? alert("Write username or password") : signUp()
+                         }} disabled={isLoading}>{isLoading ? 'Loading...' : 'SignUp'}</Button>
                     <Link className='hover:text-blue-900 active:text-blue-600 font-sans font-semibold' href='/auth/'>Already have an account ?</Link>
                </form>
           </div>
      );
 }
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { CheckInternet } from "../../context/CheckInternet";
 export default Signup

@@ -7,19 +7,22 @@ import { BrowserRouter } from 'react-router-dom'
 import ThemeContextProvider from './context/ThemeContext.jsx'
 import UsernameProvider from './context/Username.jsx'
 import UserContextProvider from './context/userContext.jsx'
+import CheckInternetProvider from './context/CheckInternet.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserContextProvider>
-      <UsernameProvider>
-        <BrowserRouter>
-          <NextUIProvider>
-            <ThemeContextProvider>
-              <App />
-            </ThemeContextProvider>
-          </NextUIProvider>
-        </BrowserRouter>
-      </UsernameProvider>
-    </UserContextProvider>
+    <CheckInternetProvider>
+      <UserContextProvider>
+        <UsernameProvider>
+          <BrowserRouter>
+            <NextUIProvider>
+              <ThemeContextProvider>
+                <App />
+              </ThemeContextProvider>
+            </NextUIProvider>
+          </BrowserRouter>
+        </UsernameProvider>
+      </UserContextProvider>
+    </CheckInternetProvider>
   </StrictMode>,
 )

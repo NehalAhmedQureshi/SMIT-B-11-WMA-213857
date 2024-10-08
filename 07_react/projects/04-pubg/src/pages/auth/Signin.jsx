@@ -6,19 +6,20 @@ import CustomInput from "../../conponents/UsernameInput";
 import { Username } from "../../context/Username";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../utils/firebase";
+import { CheckInternet } from "../../context/CheckInternet";
 
 export default function Signin() {
      // console.log(window.location.pathname);
      // * states
      const {username , setUsername} = useContext(Username)
-     // console.log("🚀 ~ Signin ~ username:", username)
+     console.log("🚀 ~ Signin ~ username:", username)
      const [type, setType] = useState("password");
      const [isLoading, setLoading] = useState(false)
      // const [email, setEmail] = useState('')
      const [password, setPassword] = useState('')
      const [errorMsg, setErrormsg] = useState('')
      const navigate = useNavigate()
-
+     const {checkInternet , setCheckInternet} = useContext(CheckInternet)
      // * show or hide password 
      const showPassword = (e) => {
           if (e.target.checked === true) {
@@ -29,7 +30,7 @@ export default function Signin() {
      };
      const email = `${username}@gmail.com`
      // * login function 
-     console.log("🚀 ~ Signin ~ email:", email)
+     // console.log("🚀 ~ Signin ~ email:", email)
      const logIn = async () => {
           try {
                setLoading(true)
@@ -41,8 +42,16 @@ export default function Signin() {
           } catch (error) {
                // console.log('error' , error , 'error msg =>',error.message)
                setLoading(false)
-               console.log(error, 'error' , errorMsg , 'error msg')
-               setErrormsg('Invalid User Email or Password')
+               // console.log(error.message === 'Firebase: Error (auth/network-request-failed).') 
+               setErrormsg('Invalid Username or Password')
+               setCheckInternet('online')
+               if(error.message === 'Firebase: Error (auth/network-request-failed).'){
+                    setErrormsg("Check your Internet Connection and Try Again")
+                    if(username === ''){
+                         setErrormsg("Check your Internet Connection and Try Again and also write username and password")
+                    }
+                    setCheckInternet('offline')
+               }
           }
      }
 
@@ -75,7 +84,9 @@ export default function Signin() {
                     <Button
                          element={"<Home/>"}
                          className="bg-gray-100 w-1/4 text-blue-600 text-medium font-semibold font-sans hover:bg-blue-600 hover:text-white transition-all ease-in-out delay-200"
-                         onClick={logIn}
+                         onClick={()=>{
+                              username === '' || password === '' ? alert("Write username or password") : logIn()
+                         }}
                          disabled={isLoading}
                     >
                          {isLoading ? 'Loading..' : 'LogIn'}
