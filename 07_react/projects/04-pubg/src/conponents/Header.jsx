@@ -92,7 +92,7 @@ export default function App() {
         </Dropdown> */}
 
         {user.isLogin ? (
-          <button as={Link} href="/add-cards" color="" variant="solid"
+          <button onClick={()=>navigate('/add-cards')} color="" variant="solid"
             className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
           >
             Add New

@@ -7,6 +7,7 @@ import Signin from './pages/auth/Signin'
 // import Signup from './pages/auth/Signup'
 import { UserContext } from './context/userContext'
 import AddCards from './pages/Home/AddCards'
+import AddProduct from './pages/Home/AddProduct'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,7 +24,7 @@ function App() {
       }>
 
         <Route index element={<Home />} />
-        <Route path='/add-cards' element={<AddCards />} />
+        <Route path='/add-cards' element={<AddProduct />} />
       </Route>
 
       {/*  //* auth router */}

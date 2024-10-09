@@ -59,12 +59,12 @@ export default function Signin() {
      return (
           <div className="flex w-full h-screen justify-center py-6  items-center background" style={{
                backgroundImage:'url(https://firebasestorage.googleapis.com/v0/b/pubgtemp-e6dd0.appspot.com/o/bg%2FWhatsApp%20Image%202024-10-09%20at%207.33.10%20PM.jpeg?alt=media&token=04fa04f8-070c-44c1-8d11-5400e06f879e)',
-               backgroundSize: '100% 100vh',
+               backgroundSize: '100vw 100vh',
                backgroundRepeat: 'no-repeat',
-               width: '100%',
+               width: '100vw',
                height: '100vh'
           }}>
-               <form className="flex flex-col w-4/5 bg-blue-gray-100  px-6 py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center signinForm  bg-blur backdrop-blur-[7.3px]">
+               <form className="flex flex-col w-4/5 bg-blue-gray-100 py-5 md:px-6 md:py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center signinForm  bg-blur backdrop-blur-[7.3px]">
                     <h1 className="text-white font-serif mb-5 text-5xl font-semibold">
                          LogIn
                     </h1>
