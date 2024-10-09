@@ -4,7 +4,7 @@ import { Outlet, Route, Routes } from 'react-router'
 import Header from './conponents/Header'
 import Home from './pages/Home/Home'
 import Signin from './pages/auth/Signin'
-import Signup from './pages/auth/Signup'
+// import Signup from './pages/auth/Signup'
 import { UserContext } from './context/userContext'
 import AddCards from './pages/Home/AddCards'
 
@@ -30,7 +30,7 @@ function App() {
       <Route path='/auth' element={<Outlet />}>
 
         <Route index element={<Signin />} />
-        <Route path='signup' element={<Signup />} />
+        {/* <Route path='signup' element={<Signup />} /> */}
       </Route>
     </Routes>
   )

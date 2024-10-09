@@ -26,24 +26,20 @@ export default function App() {
   console.log(user.username);
   const handleSignOut = async () => {
     await signOut(auth);
-    navigate("/auth");
+    // navigate("/auth");
   };
   return (
     <Navbar
+      className="bg-black text-slate-200 "
       shouldHideOnScroll
-      className="bg-slate-600 text-slate-200 border-b-2 border-slate-500"
     >
       <NavbarBrand className="">
         <p
           onClick={() => {
-            navigate();
+            navigate('/');
           }}
           className="font-bold cursor-pointer text-inherit text-xl"
-        >
-          {user?.username
-            ? `${user.username.toUpperCase()}  ACCOUNTS`
-            : "GUEST"}{" "}
-        </p>
+        >FAIZAN ACCOUNT'S</p>
       </NavbarBrand>
 
       {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -96,29 +92,35 @@ export default function App() {
         </Dropdown> */}
 
         {user.isLogin ? (
-          <Button as={Link} href="/add-cards" color="danger" variant="solid">
+          <button as={Link} href="/add-cards" color="" variant="solid"
+            className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+          >
             Add New
-          </Button>
+          </button>
         ) : (
           ""
         )}
-        <Button color="danger" variant="solid">
+        <button color="" variant="solid"
+          className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600">
           Change
-        </Button>
+        </button>
         {user.isLogin ? (
-          <Button
-            color="danger"
+          <button
+            color=""
+            className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+            variant="solid"
             onClick={() => {
               handleSignOut();
             }}
-            variant="solid"
           >
             Logout
-          </Button>
+          </button>
         ) : (
-          <Button as={Link} href="/auth" color="danger" variant="solid">
+          <button as={Link} href="/auth" variant="solid"
+          className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+          onClick={()=>navigate("/auth")}>
             SignIn
-          </Button>
+          </button>
         )}
       </NavbarContent>
     </Navbar>

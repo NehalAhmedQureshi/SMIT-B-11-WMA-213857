@@ -38,6 +38,7 @@ function CustomInput({onchange}) {
                     placeholder="Enter your username"
                     maxLength={15}
                     minLength={7}
+                    color='warning'
                />
                {error && <p className="mt-2 text-red-600 font-semibold">{error}</p>}
           </div>
