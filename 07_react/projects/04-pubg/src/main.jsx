@@ -10,9 +10,8 @@ import UserContextProvider from './context/userContext.jsx'
 import CheckInternetProvider from './context/CheckInternet.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <CheckInternetProvider>
-      <UserContextProvider>
+    <UserContextProvider>
+      <CheckInternetProvider>
         <UsernameProvider>
           <BrowserRouter>
             <NextUIProvider>
@@ -22,7 +21,6 @@ createRoot(document.getElementById('root')).render(
             </NextUIProvider>
           </BrowserRouter>
         </UsernameProvider>
-      </UserContextProvider>
-    </CheckInternetProvider>
-  </StrictMode>,
+      </CheckInternetProvider>
+    </UserContextProvider>,
 )
