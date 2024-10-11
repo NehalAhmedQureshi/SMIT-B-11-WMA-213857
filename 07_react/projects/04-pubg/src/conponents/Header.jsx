@@ -38,7 +38,7 @@ export default function App() {
           onClick={() => {
             navigate('/');
           }}
-          className="font-bold cursor-pointer text-inherit text-xl"
+          className="font-bold cursor-pointer text-inherit text-xl text-white"
         >FAIZAN ACCOUNT'S</p>
       </NavbarBrand>
 

@@ -1,12 +1,15 @@
 import { Input, Textarea } from "@nextui-org/react";
 import { Button } from "antd";
-import { db, auth } from "../../utils/firebase";
+import { db, auth, storage } from "../../utils/firebase";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { doc, getDoc, setDoc, addDoc } from "firebase/firestore";
+import {getDownloadURL, ref, uploadBytes} from 'firebase/storage'
+import { doc, getDoc, setDoc, addDoc,collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import { serverTimestamp } from "firebase/firestore/lite";
+// import { storage } from "../../utils/firebase";
 // import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
@@ -15,35 +18,46 @@ export default function AddProduct() {
   const [productCategory, setProductCategory] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [loader, setLoader] = useState();
+  const [productImg , setProductImg] = useState('')
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-
+  const [errorMsg , setErrorMsg ] = useState('')
+  const [allCards , setAllCards] = useState()
+  const [url,setUrl] = useState()
+  
+  
   async function addProduct() {
     try {
-      setLoader(true);
-      const docRef = doc(db, "products", user.uid);
-      let importProd = (await getDoc(docRef)).data();
-      const prod = {
-        owner: user.uid,
-        productName,
-        productPrice,
-        productDesc,
-        productCategory,
-      };
-      const result = addDoc(docRef, {
-        importProd,
-        prod,
-      });
-
-      console.log(result, "result");
-      navigate("/all-products/");
-      setLoader(false);
+      setLoader(true)
+      if(productName === '' || productCategory === '' || productPrice === '' || productImg === ''){
+        setLoader(false)
+        setErrorMsg('Kindly Fill All Input Fields!')
+        console.log('fucntion chl gaya')
+      }else{
+        setErrorMsg('')
+        const storageRef = ref(storage , "cardImgs" )
+        const uploadTask =await uploadBytes(storageRef, productImg);
+        const url = await getDownloadURL(storageRef)
+        setUrl(url)
+        const docRef = collection(db , 'cards')
+        const result = await addDoc(docRef , {
+          productName ,
+          productCategory,
+          url,
+          productPrice,
+        })
+        console.log(result.id)
+        setLoader(false)
+        
+      }
     } catch (error) {
-      setLoader(false);
-      console.log("🚀 ~ addProduct ~ error:", error);
-      console.log("🚀 ~ addProduct ~ error ~ message:", error.message);
+      console.log("🚀 ~ addProduct ~ error:", error)
+      console.log("🚀 ~ addProduct ~ error:", error.message)
+      setLoader(false)
     }
   }
+  
+
 
   return (
     <div
@@ -64,11 +78,13 @@ export default function AddProduct() {
         <div className="heading  text-orange-500 text-4xl font-semibold ">
           Add Card
         </div>
-        <div className="addproduct flex flex-col gap-4 w-full px-12 justify-center items-center">
+        <div className="addproduct flex flex-col gap-4 w-full px-12 justify-center ">
+          <div className="text-rose-500 font-bold">{errorMsg ? errorMsg : ''}</div>
           <Input
             variant="underlined"
             label="Product Name"
             type="text"
+            value={productName}
             className="productName text-slate-900 font-bold capitalize"
             color="warning"
             style={{
@@ -83,6 +99,7 @@ export default function AddProduct() {
           <Input
             variant="underlined"
             label="Product Type"
+            value={productCategory}
             style={{
               color: "white",
               fontWeight: 600,
@@ -93,6 +110,7 @@ export default function AddProduct() {
             className="productType font-bold"
             onChange={(e) => setProductCategory(e.target.value)}
           />
+          <input value={productImg} type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setProductImg(e.target.files[0])}/>
           {/* <Textarea
             label="Product Description"
             variant="bordered"
@@ -114,9 +132,11 @@ export default function AddProduct() {
           <Input
             variant="underlined"
             label="Product Price"
+            value={productPrice}
             type="number"
-            className="productPrice font-bold"
+            className="productPrice  text-white font-extrabold"
             color="warning"
+            
             onChange={(e) => setProductPrice(e.target.value)}
           />
           <button
@@ -124,7 +144,7 @@ export default function AddProduct() {
             loading={loader}
             className="rounded-full py-2 outline outline-orange-600 hover:bg-orange-400 hover:outline-orange-500 active:bg-orange-600 active:border-orange-500 active:text-orange-300 px-4 text-slate-200 text-lg font-semibold mt-4 bg-orange-500"
           >
-            Add Card
+            {loader === true ? 'Loading...' : "Add Card"}
           </button>
         </div>
       </div>
