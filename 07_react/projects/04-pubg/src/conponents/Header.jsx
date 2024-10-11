@@ -23,7 +23,7 @@ import { useNavigate } from "react-router";
 export default function App() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  console.log(user.username);
+  // console.log(user.username);
   const handleSignOut = async () => {
     await signOut(auth);
     // navigate("/auth");

@@ -10,6 +10,7 @@ import {
      Typography,
      Button,
 } from "@material-tailwind/react";
+
 export default function AllCards({id}) {
      const [allProduct, setAllProduct] = useState([]);
      const [search, setSearch] = useState("");
