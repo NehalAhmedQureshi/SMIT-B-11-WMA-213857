@@ -19,7 +19,7 @@ export default function CustomModal() {
      // console.log("🚀 ~ CustomModal ~ productPrice:", productPrice)
      const [productCategory, setType] = useState('')
      // console.log("🚀 ~ CustomModal ~ productCategory:", productCategory)
-     const [url ,setImg] = useState('')
+     const [url, setImg] = useState('')
      const [errorMsg, setErrorMsg] = useState('')
 
      async function getProduct() {
@@ -42,19 +42,19 @@ export default function CustomModal() {
           setLoading(false)
      }, [])
      const { isOpen, onOpen, onOpenChange } = useDisclosure();
-     
+
      async function UpdateCard() {
           try {
                const docRef = doc(db, 'cards', id)
-               const result =await updateDoc(docRef , {
-                    productName ,
+               const result = await updateDoc(docRef, {
+                    productName,
                     productCategory,
-                    productPrice ,
+                    productPrice,
                     url,
                })
                // console.log("🚀 ~ UpdateCard ~ result:", result)
                setErrorMsg('Changes Successfully!')
-               navigate(`/cards/${id}`)
+               navigate(`/card/${id}`)
           } catch (error) {
                // console.log("🚀 ~ UpdateCard ~ error:", error)
                console.log("🚀 ~ UpdateCard ~ error:", error.message)
@@ -64,7 +64,7 @@ export default function CustomModal() {
 
      return (
           <div>
-               <Button onPress={onOpen} onClick={()=>getProduct()} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
+               <Button onPress={onOpen} onClick={() => getProduct()} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
                <Modal
                     isOpen={isOpen}
                     onOpenChange={onOpenChange}
@@ -74,7 +74,7 @@ export default function CustomModal() {
                          {(onClose) => (
                               <>
                                    <ModalHeader className="flex flex-col gap-1">Edit Card</ModalHeader>
-                                   {productName == undefined?<div className="w-full text-center">Loading...</div>:<ModalBody>
+                                   {productName == undefined ? <div className="w-full text-center">Loading...</div> : <ModalBody>
                                         <div className="error text-red-400">{errorMsg ? errorMsg : ''}</div>
                                         <Input
                                              autoFocus
@@ -83,7 +83,7 @@ export default function CustomModal() {
                                              variant="bordered"
                                              type="text"
                                              color="warning"
-                                             value={productName ?  productName:'Loading...'}
+                                             value={productName ? productName : 'Loading...'}
                                              onChange={(e) => { setName(e.target.value) }}
                                         />
                                         <Input
@@ -93,7 +93,7 @@ export default function CustomModal() {
                                              variant="bordered"
                                              color="warning"
                                              onChange={(e) => { setType(e.target.value) }}
-                                             value={productCategory ? productCategory: 'Loading...'  }
+                                             value={productCategory ? productCategory : 'Loading...'}
                                         />
                                         <Input
                                              label="Card Price"
@@ -101,7 +101,7 @@ export default function CustomModal() {
                                              type="number"
                                              variant="bordered"
                                              color="warning"
-                                             value={productPrice ? productPrice: '000' }
+                                             value={productPrice ? productPrice : '000'}
                                              onChange={(e) => { setPrice(e.target.value) }}
                                         />
                                    </ModalBody>}

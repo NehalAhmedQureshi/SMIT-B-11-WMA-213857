@@ -4,6 +4,7 @@ import { db } from "../../utils/firebase";
 import { useNavigate, useParams } from "react-router";
 // import Modal from "../../conponents/Modal";
 import CustomModal from "../../conponents/Modal";
+import DeleteModal from "../../conponents/DeleteModal";
 
 
 
@@ -25,16 +26,7 @@ export default function Card() {
           getCardData()
      }, [])
 
-     async function deleteCard() {
-          try {
-               const docRef = doc(db, 'cards', id)
-               const deleteData = await deleteDoc(docRef)
-               // console.log("🚀 ~ deleteCard ~ deleteData:", deleteData)
-               navigate('/cards')
-          } catch (error) {
-               // console.log("🚀 ~ deleteCard ~ error:", error)
-          }
-     }
+     
 
      return (
           <div className="main w-full">
@@ -53,16 +45,16 @@ export default function Card() {
                          <div className="card bg-blur backdrop-blur-[7.6px] w-[80%] mx-auto  rounded-lg flex gap-5 flex-col hover:shadow-lg  hover:shadow-white justify-evenly items-center pb-2 h-[80vh]">
                               <div className="img rounded-lg overflow-hidden h-[50vh]"><img src={cardData.url} alt="no-image" className="w-full h-full" /></div>
                               <div className="content w-full text-orange-500 font-bold capitalize flex justify-between  px-6 items-center">
-                                   <div className="name text-3xl font-serif">{cardData.productName}</div>
-                                   <div className="price">RS-{cardData.productPrice}</div>
+                                   <div className="name text-3xl font-serif">Carding Account</div>
+                                   <div className="price">RS-{cardData.productPrice}/=PKR</div>
                               </div>
                               <div className="info w-full text-orange-500 font-bold capitalize flex justify-between  px-6 items-center">
-                                   <div className="email px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Email:example@gmial.com</div>
-                                   <div className="password px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Password:2333232</div>
+                                   <div className="email px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Email:{cardData.productName}</div>
+                                   <div className="password px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Password:{cardData.productCategory}</div>
                               </div>
                               <div className="footer px-5 w-full flex justify-between items-center">
                                    <CustomModal key={cardData.productName}/>
-                                   <button className="px-5 py-2 bg-orange-500 hover:bg-orange-400 active:bg-orange-600 active:text-orange-300 rounded-lg cursor-pointer" onClick={() => deleteCard()}>Delete Card</button>
+                                   <DeleteModal />
                               </div>
                          </div>
                     </div>
