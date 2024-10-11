@@ -10,7 +10,7 @@ import {
      Typography,
      Button,
 } from "@material-tailwind/react";
-export default function AllCards() {
+export default function AllCards({id}) {
      const [allProduct, setAllProduct] = useState([]);
      const [search, setSearch] = useState("");
 
@@ -29,13 +29,13 @@ export default function AllCards() {
      }, []);
 
      return (
-          <div className="main w-full flex flex-col justify-center items-center py-5 bg-transparent "
+          <div id={id} className="main w-full flex flex-col justify-center items-center py-5 bg-transparent "
           style={{
                backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/pubgtemp-e6dd0.appspot.com/o/WhatsApp%20Image%202024-10-09%20at%207.33.10%20PM.jpeg?alt=media&token=e96f46b7-5c3a-4132-81ea-3523949b2ded)',
-               backgroundSize: '100% 90vh',
+               backgroundSize: '100% 100vh',
                backgroundRepeat: 'no-repeat',
                width: '100%',
-               height: '89vh'
+               height: '100vh'
           }}
           >
                <input

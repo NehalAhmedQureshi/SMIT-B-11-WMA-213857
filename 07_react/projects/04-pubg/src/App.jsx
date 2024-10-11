@@ -25,7 +25,7 @@ function App() {
         </div>
       }>
 
-        <Route index element={<AllCards />} />
+        <Route index element={<Home />} />
         <Route path='/add-cards' element={<AddProduct />} />
         <Route path="/product/:id" element={<Card />} />
       </Route>
