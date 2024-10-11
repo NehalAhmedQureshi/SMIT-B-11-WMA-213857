@@ -64,7 +64,7 @@ export default function CustomModal() {
 
      return (
           <div>
-               <Button onPress={onOpen} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
+               <Button onPress={onOpen} onClick={()=>getProduct()} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
                <Modal
                     isOpen={isOpen}
                     onOpenChange={onOpenChange}
