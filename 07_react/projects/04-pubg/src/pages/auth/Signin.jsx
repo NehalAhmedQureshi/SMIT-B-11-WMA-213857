@@ -12,7 +12,7 @@ export default function Signin() {
      // console.log(window.location.pathname);
      // * states
      const { username, setUsername } = useContext(Username)
-     console.log("🚀 ~ Signin ~ username:", username)
+     // console.log("🚀 ~ Signin ~ username:", username)
      const [type, setType] = useState("password");
      const [isLoading, setLoading] = useState(false)
      // const [email, setEmail] = useState('')

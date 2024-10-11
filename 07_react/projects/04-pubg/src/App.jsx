@@ -14,7 +14,7 @@ import Card from './pages/Home/Card'
 function App() {
   const [count, setCount] = useState(0)
   const {user} = useContext(UserContext)
-  console.log('user ====>' , user )
+  // console.log('user ====>' , user )
   return (
     <Routes>
       {/*  //* home route */}
@@ -27,7 +27,8 @@ function App() {
 
         <Route index element={<Home />} />
         <Route path='/add-cards' element={<AddProduct />} />
-        <Route path="/product/:id" element={<Card />} />
+        <Route path='/cards' element={<AllCards />}/>
+        <Route path="/card/:id" element={<Card />} />
       </Route>
 
       {/*  //* auth router */}

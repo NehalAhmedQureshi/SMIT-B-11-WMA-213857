@@ -18,7 +18,7 @@ export default function AddProduct() {
   const [productCategory, setProductCategory] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [productImg , setProductImg] = useState('')
+  const [productImg , setProductImg] = useState()
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [errorMsg , setErrorMsg ] = useState('')
@@ -28,32 +28,31 @@ export default function AddProduct() {
   
   async function addProduct() {
     try {
-      setLoader(true)
-      if(productName === '' || productCategory === '' || productPrice === '' || productImg === ''){
-        setLoader(false)
-        setErrorMsg('Kindly Fill All Input Fields!')
-        console.log('fucntion chl gaya')
-      }else{
-        setErrorMsg('')
-        const storageRef = ref(storage , "cardImgs" )
-        const uploadTask =await uploadBytes(storageRef, productImg);
-        const url = await getDownloadURL(storageRef)
-        setUrl(url)
-        const docRef = collection(db , 'cards')
-        const result = await addDoc(docRef , {
-          productName ,
-          productCategory,
-          url,
-          productPrice,
-        })
-        console.log(result.id)
-        setLoader(false)
-        
+      setLoader(true);
+      if (!productName || !productCategory || !productPrice || !productImg) {
+        throw new Error('Kindly Fill All Input Fields!');
       }
+      setErrorMsg('');
+  
+      const storageRef = ref(storage, `cardImgs/${productImg.name}`);
+      const uploadTask = await uploadBytes(storageRef, productImg);
+  
+      const url = await getDownloadURL(uploadTask.ref);
+      const docRef = collection(db, 'cards');
+      
+      await addDoc(docRef, {
+        productName,
+        productCategory,
+        url,
+        productPrice,
+      });
+  
+      // Optionally navigate or show success message
+      navigate('/'); // Redirect to products page
     } catch (error) {
-      console.log("🚀 ~ addProduct ~ error:", error)
-      console.log("🚀 ~ addProduct ~ error:", error.message)
-      setLoader(false)
+      setLoader(false);
+      setErrorMsg(error.message);
+      console.error("Error adding product:", error);
     }
   }
   
@@ -110,7 +109,7 @@ export default function AddProduct() {
             className="productType font-bold"
             onChange={(e) => setProductCategory(e.target.value)}
           />
-          <input value={productImg} type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setProductImg(e.target.files[0])}/>
+          <Input type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setProductImg(e.target.files[0])}/>
           {/* <Textarea
             label="Product Description"
             variant="bordered"

@@ -11,7 +11,7 @@ import {
      Button,
 } from "@material-tailwind/react";
 
-export default function AllCards({id}) {
+export default function AllCards({ id }) {
      const [allProduct, setAllProduct] = useState([]);
      const [search, setSearch] = useState("");
 
@@ -23,21 +23,19 @@ export default function AllCards({id}) {
      }
 
      const searched = allProduct?.filter(
-          (data) => data.productName.toLowerCase().indexOf(search) !== -1
+          (data) => data.productPrice.toLowerCase().indexOf(search) !== -1
      );
      useEffect(() => {
           getProduct();
      }, []);
 
      return (
-          <div id={id} className="main w-full flex flex-col justify-center items-center py-5 bg-transparent "
-          style={{
-               backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/pubgtemp-e6dd0.appspot.com/o/WhatsApp%20Image%202024-10-09%20at%207.33.10%20PM.jpeg?alt=media&token=e96f46b7-5c3a-4132-81ea-3523949b2ded)',
-               backgroundSize: '100% 100vh',
-               backgroundRepeat: 'no-repeat',
-               width: '100%',
-               height: '100vh'
-          }}
+          <div id={id} className="main w-full flex min-h-[89vh] flex-col justify-center items-center py-5 bg-transparent"
+               style={{
+                    backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/pubgtemp-e6dd0.appspot.com/o/WhatsApp%20Image%202024-10-09%20at%207.33.10%20PM.jpeg?alt=media&token=e96f46b7-5c3a-4132-81ea-3523949b2ded)',
+                    backgroundSize: '100% 100vh',
+                    backgroundRepeat: 'repeat',
+               }}
           >
                <input
                     placeholder="Search Products"
@@ -48,9 +46,9 @@ export default function AllCards({id}) {
                <div className="w-full cards flex flex-wrap justify-center items-center" >
 
                     {searched.map((data, index) => (
-                         <Link key={data.id} className="w-5/6 md:w-96 flex justify-center items-center" to={`/product/${data.id}`}>
-                              <Card className="w-11/12 md:w-96 m-4 bg-blur backdrop-blur-[9.6px] hover:border-2 text-white">
-                                   <CardHeader shadow={false} floated={false} className="h-60">
+                         <Link key={data.id} className="sm:w-3/6 md:w-72 flex justify-center items-center" to={`/card/${data.id}`}>
+                              <Card className="w-11/12 md:w-72 m-2 bg-blur backdrop-blur-[9.6px] hover:border-2 text-white">
+                                   <CardHeader shadow={false} floated={false} className="h-44">
                                         <img
                                              src={data.url ? data.url : ''}
                                              alt="card-image"
@@ -58,13 +56,18 @@ export default function AllCards({id}) {
                                         />
                                    </CardHeader>
                                    <CardBody>
-                                        <div className="mb-2 flex items-center justify-between">
-                                             <Typography color="white" className="font-medium">
-                                                  {data.productName}
+                                        <div className=" flex flex-col items-center justify-between">
+                                             <Typography color="white" className="font-sans font-bold text-xl">
+                                                  Carding Accounts
                                              </Typography>
-                                             <Typography color="white" className="font-medium">
-                                                  RS-{data.productPrice}
-                                             </Typography>
+                                             <div className="flex justify-evenly w-full">
+                                                  <Typography color="white" className=" font-semibold text-sm">
+                                                       {data.productPrice}-PKR
+                                                  </Typography>
+                                                  <Typography color="white" className="font-bold font-serif text-sm">
+                                                       Login Ready
+                                                  </Typography>
+                                             </div>
                                         </div>
                                    </CardBody>
                                    <CardFooter className="pt-0">

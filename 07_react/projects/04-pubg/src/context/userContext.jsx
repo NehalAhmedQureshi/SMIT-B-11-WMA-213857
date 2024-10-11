@@ -39,10 +39,10 @@ function UserContextProvider({ children }) {
                          navigate("/auth")
                     }
                } catch (error) {
-                    console.log("🚀 ~ subscriber ~ error:", error)
+                    // console.log("🚀 ~ subscriber ~ error:", error)
                     console.log("🚀 ~ subscriber ~ error:", error.message)
                     if (error.message === 'Failed to get document because the client is offline.') {
-                         console.log('net lagwa lo')
+                         // console.log('net lagwa lo')
                          setInternet(false)
                     }
                }
