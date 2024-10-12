@@ -6,7 +6,7 @@ export default function Home() {
      return (
           <div className="main w-full">
                <div
-                    className="main flex flex-col flex-grow h-[89vh] border-2"
+                    className="main flex flex-col flex-grow h-[90.2vh]"
                     style={{
                          backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/pubgtemp-e6dd0.appspot.com/o/WhatsApp%20Image%202024-10-09%20at%207.33.10%20PM.jpeg?alt=media&token=e96f46b7-5c3a-4132-81ea-3523949b2ded)',
                          backgroundSize: '100% 90vh', // Changed for responsiveness

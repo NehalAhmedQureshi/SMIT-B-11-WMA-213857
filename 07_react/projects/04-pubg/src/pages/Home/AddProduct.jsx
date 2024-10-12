@@ -48,7 +48,7 @@ export default function AddProduct() {
       });
   
       // Optionally navigate or show success message
-      navigate('/'); // Redirect to products page
+      navigate('/cards'); // Redirect to products page
     } catch (error) {
       setLoader(false);
       setErrorMsg(error.message);

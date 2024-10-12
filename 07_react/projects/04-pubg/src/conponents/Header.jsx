@@ -30,15 +30,15 @@ export default function App() {
   };
   return (
     <Navbar
-      className="bg-black text-slate-200 "
+      className="bg-black text-slate-200 p-0 m-0"
       shouldHideOnScroll
     >
-      <NavbarBrand className="">
+      <NavbarBrand className="p-0 m-0">
         <p
           onClick={() => {
             navigate('/');
           }}
-          className="font-bold cursor-pointer text-inherit text-xl text-white"
+          className="font-bold cursor-pointer text-inherit md:text-xl text-white"
         >FAIZAN ACCOUNT'S</p>
       </NavbarBrand>
 
@@ -60,7 +60,7 @@ export default function App() {
         </NavbarItem>
       </NavbarContent> */}
 
-      <NavbarContent as="div" justify="end" className="flex gap-5">
+      <NavbarContent as="div" justify="end" className="flex gap-2 md:gap-5">
         {/* //* profile icon */}
         {/* <Dropdown placement="bottom-end">
           <DropdownTrigger>
@@ -93,21 +93,21 @@ export default function App() {
 
         {user.isLogin ? (
           <button onClick={()=>navigate('/add-cards')} color="" variant="solid"
-            className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+            className="md:px-4 px-2 py-[3px] md:py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 text-sm active:border-orange-300 hover:text-orange-600"
           >
             Add New
           </button>
         ) : (
           ""
         )}
-        <button color="" variant="solid"
-          className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600">
+        {/* <button color="" variant="solid"
+          className="md:px-4 px-2 py-[3px] md:py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600">
           Change
-        </button>
+        </button> */}
         {user.isLogin ? (
           <button
             color=""
-            className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+            className="md:px-4 px-2 py-[3px] md:py-1 text-sm border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
             variant="solid"
             onClick={() => {
               handleSignOut();

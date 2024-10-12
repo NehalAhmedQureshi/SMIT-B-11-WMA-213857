@@ -21,13 +21,13 @@ export default function DeleteModal() {
 
     <>
       <Button color="warning" onPress={onOpen}>Delete Card</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Delete Confirmation!</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-red-500">Delete Confirmation!</ModalHeader>
               <ModalBody>
-                <p>If you delete this card will be gone forever.Are you sure you want to proceed?</p>
+                <p className="text-red-600">If you delete this card will be gone forever.Are you sure you want to proceed?</p>
               </ModalBody>
               <ModalFooter>
                 <Button variant="ghost" onPress={onClose}>
