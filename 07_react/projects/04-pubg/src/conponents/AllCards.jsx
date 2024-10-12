@@ -16,17 +16,18 @@ export default function AllCards({ id }) {
      const [search, setSearch] = useState("");
 
 
-     async function getProduct() {
+     async function getCards() {
           const result = await getDocs(collection(db, "cards"));
-          const products = result.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setAllCards(products);
+          const cards = result.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          // console.log("🚀 ~ getCards ~ cards:", cards)
+          setAllCards(cards);
      }
 
      const searched = allCard?.filter(
-          (data) => data.CardType.toLowerCase().indexOf(search) !== -1
+          (data) => data.cardType.toLowerCase().indexOf(search) !== -1
      );
      useEffect(() => {
-          getProduct();
+          getCards();
      }, []);
 
      return (

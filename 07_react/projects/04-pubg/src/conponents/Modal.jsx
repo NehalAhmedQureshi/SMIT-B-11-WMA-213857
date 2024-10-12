@@ -1,44 +1,43 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link, useNavbar } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { db } from "../utils/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore/lite";
-// import {MailIcon} from './MailIcon.jsx';
-// import {LockIcon} from './LockIcon.jsx';
+import { UserContext } from "../context/userContext";
 
 export default function CustomModal() {
      const { id } = useParams();
-     // console.log("🚀 ~ CustomModal ~ id: from modal", id)
+     const { user } = useContext(UserContext)
      const navigate = useNavigate()
      const [cardData, setCardData] = useState([])
      const [loading, setLoading] = useState(true)
-     const [productName, setName] = useState('')
-     // console.log("🚀 ~ CustomModal ~ productName:", productName)
-     const [productPrice, setPrice] = useState('')
-     // console.log("🚀 ~ CustomModal ~ productPrice:", productPrice)
-     const [productCategory, setType] = useState('')
-     // console.log("🚀 ~ CustomModal ~ productCategory:", productCategory)
+     const [cardPrice, setPrice] = useState('')
+     const [cardType, setType] = useState('')
+     const [accountEmail, setAccountEmail] = useState('')
+     const [accountPassword, setAccountPassword] = useState('')
      const [url, setImg] = useState('')
      const [errorMsg, setErrorMsg] = useState('')
 
-     async function getProduct() {
+     async function getCard() {
           try {
                const docRef = doc(db, 'cards', id)
                const data = await getDoc(docRef)
                // console.log("🚀 ~ useEffect ~ data:", data.data())
                setCardData(data.data())
-               setName(cardData.productName)
-               setPrice(cardData.productPrice)
-               setType(cardData.productCategory)
+               // setName(cardData.productName)
+               setPrice(cardData.cardPrice)
+               setType(cardData.cardType)
                setImg(cardData.url)
+               setAccountEmail(cardData.accountEmail)
+               setAccountPassword(cardData.accountPassword)
           } catch (error) {
-               console.log("🚀 ~ getProduct ~ error:", error.message)
-               // console.log("🚀 ~ getProduct ~ error:", error)
+               console.log("🚀 ~ getCard ~ error:", error.message)
+               // console.log("🚀 ~ getCard ~ error:", error)
           }
      }
      useEffect(() => {
-          getProduct()
+          getCard()
           setLoading(false)
      }, [])
      const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -47,10 +46,12 @@ export default function CustomModal() {
           try {
                const docRef = doc(db, 'cards', id)
                const result = await updateDoc(docRef, {
-                    productName,
-                    productCategory,
-                    productPrice,
+                    cardType,
+                    cardPrice,
                     url,
+                    accountEmail,
+                    accountPassword,
+                    uid: user?.uid,
                })
                // console.log("🚀 ~ UpdateCard ~ result:", result)
                setErrorMsg('Changes Successfully!')
@@ -64,7 +65,7 @@ export default function CustomModal() {
 
      return (
           <div>
-               <Button onPress={onOpen} onClick={() => getProduct()} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
+               <Button onPress={onOpen} onClick={() => getCard()} color="warning">{loading ? 'Loading..' : 'Edit'}</Button>
                <Modal
                     isOpen={isOpen}
                     onOpenChange={onOpenChange}
@@ -74,9 +75,9 @@ export default function CustomModal() {
                          {(onClose) => (
                               <>
                                    <ModalHeader className="flex flex-col gap-1">Edit Card</ModalHeader>
-                                   {productName == undefined ? <div className="w-full text-center">Loading...</div> : <ModalBody>
+                                   {cardType == undefined ? <div className="w-full text-center">Loading...</div> : <ModalBody>
                                         <div className="error text-red-400">{errorMsg ? errorMsg : ''}</div>
-                                        <Input
+                                        {/* <Input
                                              autoFocus
                                              label="Card Name"
                                              placeholder="Enter Card Name"
@@ -85,7 +86,7 @@ export default function CustomModal() {
                                              color="warning"
                                              value={productName ? productName : 'Loading...'}
                                              onChange={(e) => { setName(e.target.value) }}
-                                        />
+                                        /> */}
                                         <Input
                                              label="Card Type"
                                              placeholder="Enter Card Type"
@@ -93,7 +94,7 @@ export default function CustomModal() {
                                              variant="bordered"
                                              color="warning"
                                              onChange={(e) => { setType(e.target.value) }}
-                                             value={productCategory ? productCategory : 'Loading...'}
+                                             value={cardType ? cardType : 'Loading...'}
                                         />
                                         <Input
                                              label="Card Price"
@@ -101,8 +102,32 @@ export default function CustomModal() {
                                              type="number"
                                              variant="bordered"
                                              color="warning"
-                                             value={productPrice ? productPrice : '000'}
+                                             value={cardPrice ? cardPrice : '000'}
                                              onChange={(e) => { setPrice(e.target.value) }}
+                                        />
+                                        <Input
+                                             variant="underlined"
+                                             label="Account Email"
+                                             type="email"
+                                             value={accountEmail}
+                                             className="productName text-slate-900 font-bold"
+                                             color="warning"
+                                             maxLength={15}
+                                             minLength={3}
+                                             onChange={(e) => setAccountEmail(e.target.value)}
+                                             required
+                                        />
+                                        <Input
+                                             variant="underlined"
+                                             label="Account Password"
+                                             type="text"
+                                             value={accountPassword}
+                                             className="productName text-slate-900 font-bold "
+                                             color="warning"
+                                             maxLength={20}
+                                             minLength={6}
+                                             required
+                                             onChange={(e) => setAccountPassword(e.target.value)}
                                         />
                                    </ModalBody>}
                                    <ModalFooter>
@@ -110,7 +135,7 @@ export default function CustomModal() {
                                              Close
                                         </Button>
                                         <Button color="warning" onClick={() => {
-                                             if (productName == cardData.productName && productCategory == cardData.productCategory && productPrice == cardData.productPrice) {
+                                             if (productName == cardData.productName && cardType == cardData.cardType && cardPrice == cardData.cardPrice) {
                                                   setErrorMsg('Please Make some changes!')
                                              } else {
                                                   UpdateCard()

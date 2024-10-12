@@ -1,16 +1,18 @@
 import { deleteDoc, deleteField, doc, getDoc, updateDoc, } from "firebase/firestore";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { db } from "../../utils/firebase";
 import { useNavigate, useParams } from "react-router";
 // import Modal from "../../conponents/Modal";
 import CustomModal from "../../conponents/Modal";
 import DeleteModal from "../../conponents/DeleteModal";
+import { UserContext } from "../../context/userContext";
 
 
 
 export default function Card() {
      const { id } = useParams();
      const [loading, setLoading] = useState(true)
+     const {user} = useContext(UserContext)
      // console.log("🚀 ~ Card ~ id:", id)
      const navigate = useNavigate()
      const [cardData, setCardData] = useState([])
@@ -26,7 +28,7 @@ export default function Card() {
           getCardData()
      }, [])
 
-     
+
 
      return (
           <div className="main w-full">
@@ -41,19 +43,25 @@ export default function Card() {
                               width: '100%',
                          }
                     }>
-                         <div className="footer px-5 w-full flex justify-start mb-4 gap-6 items-center">
-                                   <CustomModal key={cardData.productName}/>
-                                   <DeleteModal />
-                              </div>
-                         <div className="card bg-blur backdrop-blur-[8.6px] w-[95%] md:w-[70%] mx-auto  rounded-lg flex gap-5 flex-col hover:shadow-lg  hover:shadow-white justify-evenly items-center pb-2">
+                         {user?.isAdmin ?<div className="footer px-5 w-full flex justify-start mb-4 gap-6 items-center">
+                              <CustomModal key={cardData.productName} />
+                              <DeleteModal />
+                         </div> : ''}
+                         <div className="card bg-white w-[95%] md:w-[70%] mx-auto  rounded-lg flex gap-5 flex-col hover:shadow-lg  hover:shadow-black justify-evenly items-center pb-2">
                               <div className="img w-full rounded-lg overflow-hidden h-[60vh] md:h-[70vh]"><img src={cardData.url} alt="no-image" className="w-full h-full" /></div>
-                              <div className="content w-full text-orange-500 font-bold capitalize flex justify-between flex-col gap-5 px-6 items-center">
+                              <div className="content w-full text-black-500 font-bold  flex justify-between flex-col gap-5 px-6 items-center">
                                    <div className="name text-3xl font-serif">Carding Account</div>
-                                   <div className="price text-xl">RS-{cardData.productPrice}/=PKR</div>
+                                   <div className="price text-xl">RS-{cardData.cardPrice}/=PKR</div>
                               </div>
-                              <div className="info w-full text-orange-500 font-bold capitalize flex gap-4 flex-col sm:flex-row justify-between  px-6 items-center">
-                                   <div className="email px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Email:{cardData.productName}</div>
-                                   <div className="password px-4 py-2 bg-orange-200 rounded-lg cursor-pointer">Password:{cardData.productCategory}</div>
+                              <div className="info w-full text-black-500 font-bold  flex gap-4 flex-col sm:flex-row justify-between  px-6 items-center">
+                                   <div className="email text-center px-4 py-2 bg-blue-gray-100 rounded-lg cursor-pointer">
+                                   <p>Email</p>
+                                   <p className=""> {cardData?.accountEmail}</p>
+                                   </div>
+                                   <div className="password text-center px-4 py-2 bg-blue-gray-100 rounded-lg cursor-pointer">
+                                        <p>Password</p>
+                                        <p className=""> {cardData?.accountPassword}</p>
+                                   </div>
                               </div>
                               {/* <div className="footer px-5 w-full flex justify-between items-center">
                                    <CustomModal key={cardData.productName}/>

@@ -18,16 +18,18 @@ import { UserContext } from "../context/userContext";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
+import DeleteModal from "./DeleteModal";
+import LogoutModal from "./LogoutModal";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function App() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   // console.log(user.username);
-  const handleSignOut = async () => {
-    await signOut(auth);
-    // navigate("/auth");
-  };
+  // const handleSignOut = async () => {
+  //   await signOut(auth);
+  //   // navigate("/auth");
+  // };
   return (
     <Navbar
       className="bg-black text-slate-200 p-0 m-0"
@@ -91,7 +93,7 @@ export default function App() {
           </DropdownMenu>
         </Dropdown> */}
 
-        {user.isLogin ? (
+        {user.isLogin ? user.isAdmin ? (
           <button onClick={()=>navigate('/add-cards')} color="" variant="solid"
             className="md:px-4 px-2 py-[3px] md:py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 text-sm active:border-orange-300 hover:text-orange-600"
           >
@@ -99,22 +101,23 @@ export default function App() {
           </button>
         ) : (
           ""
-        )}
+        ):''}
         {/* <button color="" variant="solid"
           className="md:px-4 px-2 py-[3px] md:py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600">
           Change
         </button> */}
         {user.isLogin ? (
-          <button
-            color=""
-            className="md:px-4 px-2 py-[3px] md:py-1 text-sm border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
-            variant="solid"
-            onClick={() => {
-              handleSignOut();
-            }}
-          >
-            Logout
-          </button>
+          // <button
+          //   color=""
+          //   className="md:px-4 px-2 py-[3px] md:py-1 text-sm border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"
+          //   variant="solid"
+          //   onClick={() => {
+          //     handleSignOut();
+          //   }}
+          // >
+          //   Logout
+          // </button>
+          <LogoutModal />
         ) : (
           <button as={Link} href="/auth" variant="solid"
           className="px-4 py-1 border-2 border-orange-600 rounded-lg bg-orange-400 hover:bg-orange-300 active:bg-orange-600 active:text-orange-200 active:border-orange-300 hover:text-orange-600"

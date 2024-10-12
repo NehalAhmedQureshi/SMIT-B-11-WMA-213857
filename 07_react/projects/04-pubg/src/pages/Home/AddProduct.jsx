@@ -17,7 +17,10 @@ export default function AddProduct() {
   // const [productName, setProductName] = useState("");
   const [cardType, setCardType] = useState("");
   const [cardPrice, setCardPrice] = useState("");
-  const [cardImg , setCardImg] = useState()
+  const [cardImg , setCardImg] = useState('')
+  const [accountEmail , setAccountEmail ] = useState('')
+  const [accountPassword , setAccountPassword ] = useState('')
+
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [errorMsg , setErrorMsg ] = useState('')
@@ -27,14 +30,14 @@ export default function AddProduct() {
   async function addCard() {
     try {
       setLoader(true);
-      if (!cardType || !cardPrice || !cardImg ) {
+      if (!cardType || !cardPrice || !cardImg || !accountEmail || !accountPassword) {
         throw new Error('Kindly Fill All Input Fields!');
       }
       setErrorMsg('');
   
       const storageRef = ref(storage, `cardImgs/${cardImg.name}`);
       const uploadTask = await uploadBytes(storageRef, cardImg);
-  b
+  
       const url = await getDownloadURL(uploadTask.ref);
       const docRef = collection(db, 'cards');
       
@@ -42,6 +45,9 @@ export default function AddProduct() {
         cardType,
         url,
         cardPrice,
+        accountEmail,
+        accountPassword,
+        uid:user?.uid
       });
   
       // Optionally navigate or show success message
@@ -75,7 +81,7 @@ export default function AddProduct() {
           Add Account
         </div>
         <div className="addproduct flex flex-col gap-2 md:gap-4 w-full px-12 justify-center ">
-          <div className="text-rose-500 font-bold">{errorMsg ? errorMsg : ''}</div>
+          <div className="text-red-500 text-center font-bold">{errorMsg ? errorMsg : ''}</div>
           {/* <Input
             variant="underlined"
             label="Card Name"
@@ -105,8 +111,9 @@ export default function AddProduct() {
             color="warning"
             className="productType font-bold"
             onChange={(e) => setCardType(e.target.value)}
+            required
           />
-          <Input type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setCardImg(e.target.files[0])}/>
+          <Input required type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setCardImg(e.target.files[0])}/>
           {/* <Textarea
             label="Product Description"
             variant="bordered"
@@ -134,7 +141,42 @@ export default function AddProduct() {
             color="warning"
             
             onChange={(e) => setCardPrice(e.target.value)}
+            required
           />
+          <Input
+            variant="underlined"
+            label="Account Email"
+            type="email"
+            value={accountEmail}
+            className="productName text-slate-900 font-bold"
+            color="warning"
+            style={{
+              color: "black",
+              fontWeight: 600,
+              textTransform: "",
+            }}
+            maxLength={15}
+            minLength={3}
+            onChange={(e) => setAccountEmail(e.target.value)}
+            required
+          /> 
+          <Input
+            variant="underlined"
+            label="Account Password"
+            type="text"
+            value={accountPassword}
+            className="productName text-slate-900 font-bold "
+            color="warning"
+            style={{
+              color: "black",
+              fontWeight: 600,
+              textTransform: "",
+            }}
+            maxLength={20}
+            minLength={6}
+            required
+            onChange={(e) => setAccountPassword(e.target.value)}
+          /> 
           <button
             onClick={() => addCard()}
             loading={loader}

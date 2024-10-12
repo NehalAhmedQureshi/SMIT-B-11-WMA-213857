@@ -10,17 +10,17 @@ import UserContextProvider from './context/userContext.jsx'
 import CheckInternetProvider from './context/CheckInternet.jsx'
 
 createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
     <UserContextProvider>
       <CheckInternetProvider>
         <UsernameProvider>
-          <BrowserRouter>
-            <NextUIProvider>
-              <ThemeContextProvider>
-                <App />
-              </ThemeContextProvider>
-            </NextUIProvider>
-          </BrowserRouter>
+          <NextUIProvider>
+            <ThemeContextProvider>
+              <App />
+            </ThemeContextProvider>
+          </NextUIProvider>
         </UsernameProvider>
       </CheckInternetProvider>
     </UserContextProvider>,
+  </BrowserRouter>
 )

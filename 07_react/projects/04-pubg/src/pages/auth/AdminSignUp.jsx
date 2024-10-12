@@ -10,7 +10,7 @@ import CustomInput from "../../conponents/UsernameInput";
 // import { Username } from "../../context/Username";
 
 
-export default function Signup() {
+export default function AdminSignup() {
      // console.log(window.location.path)
      // * show or hide password
      // const { username } = useContext(Username)
@@ -38,7 +38,7 @@ export default function Signup() {
      // console.log("🚀 ~ Signup ~ email:", email)
      // console.log("🚀 ~ signUp ~ email:", email)
      // console.log("🚀 ~ signUp ~ password:", password)
-     const signUp = async () => {
+     const adminsignUp = async () => {
           try {
                setLoading(true)
                const result = await createUserWithEmailAndPassword(auth, email, password)
@@ -47,7 +47,7 @@ export default function Signup() {
                const addDocument =await setDoc(docRef, {
                     email,
                     password,
-                    isAdmin:false,
+                    isAdmin:true,
                     uid: result.user.uid,
                })
                // console.log("🚀 ~ signUp ~ addDocument:", addDocument)
@@ -78,7 +78,7 @@ export default function Signup() {
           }}>
                <form className="flex flex-col w-4/5 bg-blue-gray-100 py-5 md:px-6 md:py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center px-3 signinForm  bg-blur backdrop-blur-[7.3px]">
                     <h1 className="text-black font-serif mb-5 text-5xl font-semibold">
-                         SignUp
+                         Admin
                     </h1>
                     <h1 className="emptyInput text-red-600 font-bold text-lg">{emptyInput === true ? 'Please Fill email or Password Field!' : ''}</h1>
                     <h1 className=" text-red-600 font-bold text-lg">{errorMsg ? errorMsg : null}</h1>
@@ -91,7 +91,7 @@ export default function Signup() {
                          type={email}
                          value={email}
                          required
-                         label="Email"
+                         label="Admin Email"
                          placeholder="Enter your email"
                          onChange={(e) => setEmail(e.target.value)}
                          
@@ -104,7 +104,7 @@ export default function Signup() {
                          value={password}
                          required
                          type={type}
-                         label="Password"
+                         label="Admin Password"
                          placeholder="Enter your password"
                          onChange={(e) => setPassword(e.target.value)}
                          
@@ -122,14 +122,14 @@ export default function Signup() {
                          element={"<Home/>"}
                          className=" w-1/4 text-medium font-semibold font-sans   transition-all ease-in-out delay-200 bg-orange-400 border-2 border-orange-600 hover:border-orange-800 hover:bg-orange-300"
                          onClick={() => {
-                              email === '' || password === '' ? setemptyInput(true) : signUp()
+                              email === '' || password === '' ? setemptyInput(true) : adminsignUp()
                          }}
                          disabled={isLoading}
                     >
                          {isLoading ? 'Loading..' : 'SignUp'}
                     </Button>
                     <Link
-                         className="cursor-pointer hover:text-blue-600 text-blue-500 active:text-blue-700 font-sans font-semibold"
+                         className="hover:text-blue-600 text-blue-500 active:text-blue-700 font-sans font-semibold"
                          onClick={()=>navigate('/auth')}
                     >
                          Already have an account ?

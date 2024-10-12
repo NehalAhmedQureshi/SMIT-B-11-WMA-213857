@@ -5,14 +5,16 @@ import { doc, getDoc } from "firebase/firestore";
 // import { setUserId } from "firebase/analytics";
 import '../App.css'
 import InternetNotFound from "../NotFound/InternetNotFound";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 
 function UserContextProvider({ children }) {
      const [isInternet , setInternet ] = useState(true)
+     const navigate = useNavigate()
      const [user, setUser] = useState({
           isLogin: false,
           email: '',
+          isAdmin:false,
      })
 
      const [isLoading, setLoading] = useState(true)
@@ -26,6 +28,7 @@ function UserContextProvider({ children }) {
                          setLoading(false)
                          setUser({
                               isLogin: true,
+                              isAdmin:false,
                               ...userInfo.data(),
                          })
                          // console.log('user hy =><=')
@@ -35,6 +38,7 @@ function UserContextProvider({ children }) {
                          setUser({
                               isLogin: false,
                               email: '',
+                              isAdmin:false,
                          })
                          navigate("/auth")
                     }

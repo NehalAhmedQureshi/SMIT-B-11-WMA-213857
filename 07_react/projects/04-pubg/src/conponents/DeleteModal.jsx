@@ -1,22 +1,22 @@
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useNavigate, useParams } from "react-router";
 
 export default function DeleteModal() {
-     const {id} = useParams()
-     const navigate = useNavigate()
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   async function deleteCard() {
-     try {
-          const docRef = doc(db, 'cards', id)
-          const deleteData = await deleteDoc(docRef)
-          // console.log("🚀 ~ deleteCard ~ deleteData:", deleteData)
-          navigate('/cards')
-     } catch (error) {
-          console.log("🚀 ~ deleteCard ~ error:", error)
-     }
-}
+    try {
+      const docRef = doc(db, 'cards', id)
+      const deleteData = await deleteDoc(docRef)
+      // console.log("🚀 ~ deleteCard ~ deleteData:", deleteData)
+      navigate('/cards')
+    } catch (error) {
+      console.log("🚀 ~ deleteCard ~ error:", error)
+    }
+  }
   return (
 
     <>
@@ -33,7 +33,7 @@ export default function DeleteModal() {
                 <Button variant="ghost" onPress={onClose}>
                   Close
                 </Button>
-                <Button onClick={()=>deleteCard()} color="danger" onPress={onClose}>
+                <Button onClick={() => deleteCard()} color="danger" onPress={onClose}>
                   Delete
                 </Button>
               </ModalFooter>
