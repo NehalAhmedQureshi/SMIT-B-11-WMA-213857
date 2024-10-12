@@ -14,37 +14,34 @@ import { serverTimestamp } from "firebase/firestore/lite";
 
 export default function AddProduct() {
   const { user } = useContext(UserContext);
-  const [productName, setProductName] = useState("");
-  const [productCategory, setProductCategory] = useState("");
-  const [productDesc, setProductDesc] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [productImg , setProductImg] = useState()
+  // const [productName, setProductName] = useState("");
+  const [cardType, setCardType] = useState("");
+  const [cardPrice, setCardPrice] = useState("");
+  const [cardImg , setCardImg] = useState()
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const [errorMsg , setErrorMsg ] = useState('')
   const [allCards , setAllCards] = useState()
   const [url,setUrl] = useState()
   
-  
-  async function addProduct() {
+  async function addCard() {
     try {
       setLoader(true);
-      if (!productName || !productCategory || !productPrice || !productImg) {
+      if (!cardType || !cardPrice || !cardImg ) {
         throw new Error('Kindly Fill All Input Fields!');
       }
       setErrorMsg('');
   
-      const storageRef = ref(storage, `cardImgs/${productImg.name}`);
-      const uploadTask = await uploadBytes(storageRef, productImg);
-  
+      const storageRef = ref(storage, `cardImgs/${cardImg.name}`);
+      const uploadTask = await uploadBytes(storageRef, cardImg);
+  b
       const url = await getDownloadURL(uploadTask.ref);
       const docRef = collection(db, 'cards');
       
       await addDoc(docRef, {
-        productName,
-        productCategory,
+        cardType,
         url,
-        productPrice,
+        cardPrice,
       });
   
       // Optionally navigate or show success message
@@ -72,44 +69,44 @@ export default function AddProduct() {
     >
       <div
         className="form flex flex-col justify-center py-10 gap-8 items-center lg:w-2/4
-          w-3/4 md:w-4/6  rounded-xl bg-blur backdrop-blur-[8.5px]"
+          w-3/4 md:w-4/6  rounded-xl bg-white text-black"
       >
-        <div className="heading  text-orange-500 text-4xl font-semibold ">
-          Add Card
+        <div className="heading text-orange-400 text-3xl md:text-4xl font-semibold ">
+          Add Account
         </div>
-        <div className="addproduct flex flex-col gap-4 w-full px-12 justify-center ">
+        <div className="addproduct flex flex-col gap-2 md:gap-4 w-full px-12 justify-center ">
           <div className="text-rose-500 font-bold">{errorMsg ? errorMsg : ''}</div>
-          <Input
+          {/* <Input
             variant="underlined"
-            label="Product Name"
+            label="Card Name"
             type="text"
             value={productName}
             className="productName text-slate-900 font-bold capitalize"
             color="warning"
             style={{
-              color: "white",
+              color: "black",
               fontWeight: 600,
               textTransform: "capitalize",
             }}
             maxLength={15}
             minLength={3}
             onChange={(e) => setProductName(e.target.value)}
-          />
+          /> */}
           <Input
             variant="underlined"
-            label="Product Type"
-            value={productCategory}
+            label="Account Type"
+            value={cardType}
             style={{
-              color: "white",
+              color: "black",
               fontWeight: 600,
               textTransform: "capitalize",
             }}
             type="text"
             color="warning"
             className="productType font-bold"
-            onChange={(e) => setProductCategory(e.target.value)}
+            onChange={(e) => setCardType(e.target.value)}
           />
-          <Input type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setProductImg(e.target.files[0])}/>
+          <Input type="file" accept="image/*" className="rounded-full bg-orange-300 hover:border-1 hover:bg-orange-500 transition-colors-opacity" onChange={(e)=>setCardImg(e.target.files[0])}/>
           {/* <Textarea
             label="Product Description"
             variant="bordered"
@@ -130,20 +127,20 @@ export default function AddProduct() {
           /> */}
           <Input
             variant="underlined"
-            label="Product Price"
-            value={productPrice}
+            label="Account Price"
+            value={cardPrice}
             type="number"
-            className="productPrice  text-white font-extrabold"
+            className="productPrice  text-black font-extrabold"
             color="warning"
             
-            onChange={(e) => setProductPrice(e.target.value)}
+            onChange={(e) => setCardPrice(e.target.value)}
           />
           <button
-            onClick={() => addProduct()}
+            onClick={() => addCard()}
             loading={loader}
             className="rounded-full py-2 outline outline-orange-600 hover:bg-orange-400 hover:outline-orange-500 active:bg-orange-600 active:border-orange-500 active:text-orange-300 px-4 text-slate-200 text-lg font-semibold mt-4 bg-orange-500"
           >
-            {loader === true ? 'Loading...' : "Add Card"}
+            {loader === true ? 'Loading...' : "Add Account"}
           </button>
         </div>
       </div>
