@@ -1,6 +1,14 @@
 
 
 export default function ChatMessage() {
+     const getDate = new Date()
+     console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
+
+     const hours = getDate.getHours() < 10 ? `0${getDate.getHours()}` : getDate.getHours() > 12 ? getDate.getHours() - 12 : ''
+     const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes()
+     const amPm = getDate.getHours > 12 ? 'PM' : 'AM'
+
+     const time = `${hours}:${minutes} ${amPm}`
      return (
           <div className="main bg-slate-700 flex flex-col flex-grow h-screen">
                {/* //* top header  */}
@@ -19,21 +27,35 @@ export default function ChatMessage() {
                     <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">Hi</div>
-                              <div className="timestamp text-[8px] flex justify-end">12:30 PM</div>
+                              <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
                     </div>
                     {/* //* send message */}
                     <div className="right-msg flex justify-end">
                          <div className="send-msg inline-block bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">ti</div>
-                              <div className="timestamp text-[8px] flex justify-end">12:30 PM</div>
+                              <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
                     </div>
                     {/* //* recieved msg */}
                     <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">Kha ho,kia kr ri ho</div>
-                              <div className="timestamp text-[8px] flex justify-end">12:30 PM</div>
+                              <div className="timestamp text-[8px] flex justify-end">{time}</div>
+                         </div>
+                    </div>
+                    {/* //* send message */}
+                    <div className="right-msg flex justify-end">
+                         <div className="send-msg inline-block bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
+                              <div className="rm-inner-msg text-sm flex justify-start">kch ni</div>
+                              <div className="timestamp text-[8px] flex justify-end">{time}</div>
+                         </div>
+                    </div>
+                    {/* //* recieved msg */}
+                    <div className="left-msg">
+                         <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
+                              <div className="rm-inner-msg text-sm flex justify-start">kesa ho , kia kr rh hoo</div>
+                              <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
                     </div>
 

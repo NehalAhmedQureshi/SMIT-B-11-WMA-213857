@@ -13,7 +13,6 @@ createRoot(document.getElementById('root')).render(
       <NextUIProvider>
         <App />
       </NextUIProvider>
-    </BrowserRouter>,
-
+    </BrowserRouter>
   </UserContextProvider>
 )
