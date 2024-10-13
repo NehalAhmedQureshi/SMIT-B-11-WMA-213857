@@ -21,6 +21,6 @@ createRoot(document.getElementById('root')).render(
           </NextUIProvider>
         </UsernameProvider>
       </CheckInternetProvider>
-    </UserContextProvider>,
+    </UserContextProvider>
   </BrowserRouter>
 )

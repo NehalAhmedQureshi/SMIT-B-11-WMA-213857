@@ -69,8 +69,8 @@ export default function Signin() {
                width: '100vw',
                height: '100vh'
           }}>
-               <form className="flex flex-col w-4/5 bg-blue-gray-100 py-5 md:px-6 md:py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center px-3 signinForm  bg-blur backdrop-blur-[7.3px]">
-                    <h1 className="text-black font-serif mb-5 text-5xl font-semibold">
+               <form className="flex flex-col w-4/5 bg-blur backdrop-blur[9px] py-5 md:px-6 md:py-5 max-w-full xl:w-2/5 lg:w-3/6 md:w-3/6 rounded-2xl gap-3 items-center px-3 signinForm  bg-blur backdrop-blur-[7.3px]">
+                    <h1 className="text-white font-serif mb-5 text-5xl font-semibold">
                          LogIn
                     </h1>
                     <h1 className="emptyInput text-red-600 font-bold text-lg">{emptyInput === true ? 'Please Fill email or Password Field!' : ''}</h1>
@@ -106,7 +106,7 @@ export default function Signin() {
                          <input type="checkbox" id="showPassword" onChange={showPassword} />
                          <label
                               htmlFor="showPassword"
-                              className="flex flex-row items-center justify-center gap-2 font-semibold font-sans text-black"
+                              className="flex flex-row items-center justify-center gap-2 font-semibold font-sans text-white"
                          >
                               Show Password
                          </label>
