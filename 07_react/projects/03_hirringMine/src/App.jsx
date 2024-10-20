@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Header from './components/Header'
 function App() {
   const [isDark, setIsDark] = useState(false)
   const [count, setCount] = useState(0)
@@ -24,9 +25,10 @@ function App() {
   }, [])
 
   return (
-    <div className={isDark ? "bg-slate-700 text-slate-100 h-screen w-full py-2 m-0 transition-colors" : "bg-white text-black w-full h-screen py-2 m-0 transition-colors"} >
+    <div className={isDark ? "bg-slate-700 text-slate-100 h-screen w-full m-0 transition-colors" : "bg-white text-black w-full h-screen m-0 transition-colors"} >
+      <Header/>
       <h1 className='text-2xl text-center'>Hirring Mine</h1>
-      <button className='bg-blue-500 hover:bg-blue-400 active:bg-blue-600 py-2 px-4 rounded-lg m-2' onClick={() => setIsDark(!isDark)}>{isDark ? "Light Theme" : "Dark Theme"}</button>
+      {/* <button className='bg-blue-500 hover:bg-blue-400 active:bg-blue-600 py-2 px-4 rounded-lg m-2' onClick={() => setIsDark(!isDark)}>{isDark ? "Light Theme" : "Dark Theme"}</button> */}
       <div className="wrap px-4">
         <div className="categories flex flex-col">
           <select name="" id="" className='bg-purple-500 hover:bg-purple-400 active:bg-purple-600 px-3 py-2 cursor-pointer w-3/12 border-3 rounded-lg font-mono mb-2'>
