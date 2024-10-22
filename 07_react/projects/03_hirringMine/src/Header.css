@@ -1,0 +1,26 @@
+.hamburger{
+     position: relative;
+}
+.hamburger .label {
+     border-radius: 50px;
+}
+.hamburger .label::after {
+     position: absolute;
+     right: 0px;
+     content: '';
+     background: #000;
+     top: -7px;
+     width: 13px;
+     height: 4px;
+     border-radius: 50px;
+}
+.hamburger .label::before {
+     position: absolute;
+     right: 0px;
+     content: '';
+     background: #000;
+     bottom: -7px;
+     width: 17px;
+     height: 4px;
+     border-radius: 50px;
+}
