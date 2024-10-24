@@ -1,0 +1,25 @@
+/* .MuiTypography-h1 {
+     font-family: Roboto, Helvetica, Arial, sans-serif;
+     color: linear-gradient(106.43deg, #522fd4, #6bdcff 95.12%);
+} */
+.heroBanner {
+     font-style: normal;
+    font-weight: 800;
+    font-size: 80px !important;
+    line-height: 100px;
+    text-align: center;
+    letter-spacing: -.02em;
+    background: linear-gradient(92deg, #522fd4, #6bdcff 95.12%);
+    /* -webkit-background-clip: text; */
+    -webkit-text-fill-color: transparent;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+
+    background-clip: text;
+    color: transparent;
+}
+.content{
+     font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+.roboto{
+     font-family: Roboto, Helvetica, Arial, sans-serif;
+}

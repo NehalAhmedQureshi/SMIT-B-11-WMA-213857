@@ -79,8 +79,8 @@ export default function Header() {
           <div
                className={
                     isDark
-                         ? "bg-gray-800 text-white main flex px-4 justify-evenly items-center h-16  py-2 overflow-hidden flex-grow gap-2"
-                         : "main flex justify-evenly gap-2 px-4 items-center  h-16  py-2 overflow-hidden flex-grow"
+                         ? "bg-gray-950 text-white main flex px-4 justify-evenly items-center h-16  py-2 overflow-hidden flex-grow gap-2"
+                         : "main flex justify-evenly gap-2 px-4 items-center  h-16  py-2 overflow-hidden flex-grow bg-slate-100"
                }
           >
                <div className={"heading"}>
