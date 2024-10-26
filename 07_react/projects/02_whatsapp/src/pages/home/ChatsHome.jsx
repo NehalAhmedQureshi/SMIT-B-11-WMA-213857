@@ -65,18 +65,7 @@ export default function ChatsHome() {
                {/* //* home */}
                <div className="home h-full overflow-y-auto ">
                     {/* //* chat */}
-                    <div className="chat px-4 gap-1 w-full relative hover:bg-slate-500 h-16 flex items-center py-2">
-                         <div className="profile w-12 h-10 bg-slate-400 rounded-full"></div>
-                         <div className="content h-full border-slate-300 w-full flex flex-col justify-evenly items-center before:absolute before:w-64 before:h-[1px] before:bg-slate-300 before:bottom-0">
-                              <div className="name w-full flex justify-between items-center">
-                                   <div className="name text-sm text-slate-200">contact name</div>
-                                   <div className="lastSeen text-xs text-slate-200">12:28 PM</div>
-                              </div>
-                              <div className="message w-full">
-                                   <div className="message text-xs text-slate-400">random message</div>
-                              </div>
-                         </div>
-                    </div>
+                    
                     {searched.map((data,index) => (
                          <div key={index} className="chat px-4 gap-1 w-full relative hover:bg-slate-500 h-16 flex items-center py-2">
                          <div className="profile w-12 h-10 bg-slate-400 rounded-full"></div>
@@ -91,9 +80,6 @@ export default function ChatsHome() {
                          </div>
                     </div>
                     ))}
-
-
-
                </div>
           </div>
      )

@@ -1,14 +1,40 @@
+import { useEffect } from "react"
+import { useState } from "react"
 
 
 export default function ChatMessage() {
-     const getDate = new Date()
-     console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
+     const user = 'Nehal'
+     const [allChats,setAllChat] = useState([])
+     const [chat, setChat] = useState('')
+     const [time , setTime] = useState('')
+     const date = () => {
+          const getDate = new Date()
+          // console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
 
-     const hours = getDate.getHours() < 10 ? `0${getDate.getHours()}` : getDate.getHours() > 12 ? getDate.getHours() - 12 : ''
-     const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes()
-     const amPm = getDate.getHours > 12 ? 'PM' : 'AM'
+          const hours = getDate.getHours() < 10 ? `0${getDate.getHours()}` : getDate.getHours() > 12 ? getDate.getHours() - 12 : ''
+          const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes()
+          const amPm = getDate.getHours > 12 ? 'PM' : 'AM'
 
-     const time = `${hours}:${minutes} ${amPm}`
+          setTime(`${hours}:${minutes} ${amPm}`)
+     }
+     const messageHandler = () => {
+          console.log('m chala')
+          if (chat !== '') {
+               console.log(chat, 'chat =.>>>')
+               const message = {
+                    text:chat,
+                    severTimeStamp:time,
+                    sender:user,
+               }
+               setAllChat([message])
+               setChat('')
+               console.log("🚀 ~ messageHandler ~ message:", message)
+          }
+               console.log("🚀 ~ messageHandler ~ allChats:", allChats)
+     }
+     useEffect(()=>{
+          date()
+     },[messageHandler])
      return (
           <div className="main bg-slate-700 flex flex-col flex-grow h-screen">
                {/* //* top header  */}
@@ -66,9 +92,10 @@ export default function ChatMessage() {
                          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
                          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
                          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
-                         <input type="text" className="w-5/6 text-sm text-slate-600 font-serif active: outline-none bg-slate-300 rounded-full pl-4" placeholder="Enter your message..." />
+                         <input type="text" className="w-5/6 text-sm text-slate-600 font-serif active: outline-none bg-slate-300 rounded-full pl-4" placeholder="Enter your message..."
+                              value={chat} onChange={(e) => { setChat(e.target.value) }} />
                          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
-                         <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
+                         <div className="sender w-7 h-7 rounded-full bg-slate-300 cursor-pointer" onClick={messageHandler}></div>
                     </div>
                </div>
           </div>
