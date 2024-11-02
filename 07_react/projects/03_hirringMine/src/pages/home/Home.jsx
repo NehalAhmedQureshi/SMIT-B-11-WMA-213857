@@ -70,7 +70,7 @@ function Home() {
             placeholder="Search by Roll or Keyword"
             className="input roboto bg-transparenttext border rounded-md hover:border-slate-900 hover:placeholder:text-slate-500 active:border-blue-600 focus:outline-blue-600 focus:placeholder:text-blue-600 pl-2 border-slate-500 outline-1 text-black h-[35px] w-[80%] bg-transparent"
           />
-          <button className="rounded-full roboto bg-[#6851FF] hover:bg-[#4838B2] active:shadow-xl shadow-lg text-white py-3 px-7 font-extrabold text-base">
+          <button className="rounded-full roboto bg-[#6851FF] hover:bg-[#4838B2] active:shadow-xl shadow-xl text-white py-3 px-7 font-extrabold text-base">
             Find Jobs
           </button>
           <div className="heading2 roboto text-[#9747FF]  text-3xl font-extrabold">
@@ -97,7 +97,7 @@ function Home() {
       {/*  //* quick steps */}
       <div className="quickSteps w-full flex flex-col min-h-screen justify-center items-center gap-16">
         <div className="quickContent flex flex-col justify-center items-center">
-          <div className="heading text-[50px] roboto font-extrabold text-black">
+          <div className="heading text-[50px] roboto font-extrabold ">
             Get Hired In 4{" "}
             <span className="text-[#6851FF]">
               Quick Easy Steps (Coming Soon)
@@ -109,7 +109,7 @@ function Home() {
           </div>
         </div>
         <div className="cards flex gap-4 px-8">
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -119,7 +119,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -129,7 +129,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -139,7 +139,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -154,7 +154,7 @@ function Home() {
       {/* //* dream */}
       <div className="dream w-full flex flex-col min-h-screen justify-center items-center gap-16">
         <div className="quickContent flex flex-col justify-center items-center">
-          <div className="heading text-[50px] roboto font-extrabold text-black">
+          <div className="heading text-[50px] roboto font-extrabold">
             Find Your Dream Job{" "}
             <span className="text-[#6851FF]">Super Fast Ever.</span>
           </div>
@@ -168,22 +168,22 @@ function Home() {
           alt="no img"
         />
         {/* <div className="cards flex gap-4 px-8">
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
             <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
             <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
             <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
           </div>
-          <div className="card bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
             <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
@@ -192,15 +192,15 @@ function Home() {
         </div> */}
       </div>
       {/*  // * carrer option */}
-      <div className="carrer w-full flex flex-col min-h-screen justify-center items-center gap-16">
+      <div className="carrer w-full flex flex-col min-h-screen justify-center items-center gap-16 py-16">
         <div className="quickContent flex flex-col justify-center items-center">
-          <div className="heading text-[50px] roboto font-extrabold text-black w-3/4 text-center">
+          <div className="heading text-[50px] roboto font-extrabold w-3/4 text-center">
             <span className="text-[#6851FF]">Countless Career Options </span>Are
             Waiting For You To Explore
           </div>
         </div>
         <div className="cards flex gap-4 px-8 h-auto flex-wrap w-full justify-center">
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -210,7 +210,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -220,7 +220,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -230,7 +230,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -240,7 +240,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -250,7 +250,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%] bg-slate-200 hover:shadow-lg transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
