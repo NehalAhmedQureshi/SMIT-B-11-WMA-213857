@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { TextField } from "@mui/material";
 import { Button } from "antd";
+import img from "../../assets/banner_career-4b7d86fb.webp";
 import "../../home.css";
+
 function Home() {
   const { isDark } = useContext(ThemeContext);
-  const [count, setCount] = useState(0);
   const [category, setCategory] = useState([]);
   const [job, setJob] = useState([]);
 
@@ -109,7 +110,7 @@ function Home() {
           </div>
         </div>
         <div className="cards flex gap-4 px-8">
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -119,7 +120,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -129,7 +130,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -139,7 +140,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -163,33 +164,7 @@ function Home() {
             We are provides the best opportunities to professional people.
           </div>
         </div>
-        <img
-          src="https://www.hiringmine.com/assets/banner_career-4b7d86fb.webp"
-          alt="no img"
-        />
-        {/* <div className="cards flex gap-4 px-8">
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
-            <div className="header"></div>
-            <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
-            <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
-          </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
-            <div className="header"></div>
-            <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
-            <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
-          </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
-            <div className="header"></div>
-            <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
-            <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
-          </div>
-          <div className="card  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
-            <div className="header"></div>
-            <div className="heading font-bold text-lg text-[#6851FF]">Create an Account</div>
-            <div className="content mt-3 px-3">Join our vibrant community. Create your account and unlock boundless opportunities.</div>
-          </div>
-          
-        </div> */}
+        <img src={img} alt="no img" />
       </div>
       {/*  // * carrer option */}
       <div className="carrer w-full flex flex-col min-h-screen justify-center items-center gap-16 py-16">
@@ -200,7 +175,7 @@ function Home() {
           </div>
         </div>
         <div className="cards flex gap-4 px-8 h-auto flex-wrap w-full justify-center">
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -210,7 +185,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -220,7 +195,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -230,7 +205,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -240,7 +215,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -250,7 +225,7 @@ function Home() {
               boundless opportunities.
             </div>
           </div>
-          <div className="card  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
+          <div className="card cursor-pointer  w-[20%]  hover:shadow-xl transition-opacity py-7 px-5   rounded-xl border-2 border-white text-center">
             <div className="header"></div>
             <div className="heading font-bold text-lg text-[#6851FF]">
               Create an Account
@@ -261,7 +236,6 @@ function Home() {
             </div>
           </div>
         </div>
-
       </div>
       {/* //* img https://www.hiringmine.com/assets/ArtIcon-abc0c65a.svg */}
     </div>
