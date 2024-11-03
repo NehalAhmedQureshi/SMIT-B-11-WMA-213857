@@ -32,6 +32,8 @@ export default function ChatsHome() {
                'contactName':'Abdur Rehman',
           },{
                'contactName':'Mama',
+          },{
+               'contactName':'Rozina Ani',
           },
      ])
      const searched = allContacts?.filter(
@@ -41,7 +43,7 @@ export default function ChatsHome() {
 
 
      return (
-          <div className="main w-80 h-screen flex flex-col bg-slate-800 py-2 gap-2">
+          <div className="main min-w-80 h-screen flex flex-col bg-slate-800 py-2 gap-2">
                {/*  //* navbar */}
                <div className="navbar  px-4 flex flex-col gap-2">
                     {/* //* header */}
@@ -57,9 +59,9 @@ export default function ChatsHome() {
                          <div className="icon bg-slate-50 w-5 h-5 rounded-full absolute left-1"></div>
                     </div>
                     <div className="tags flex flex-row gap-1">
-                         <div className="tag bg-slate-500 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">All</div>
-                         <div className="tag bg-slate-500 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">Unread</div>
-                         <div className="tag bg-slate-500 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">Groups</div>
+                         <div className="tag bg-slate-500 active:bg-green-600 active:text-slate-50 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">All</div>
+                         <div className="tag bg-slate-500 active:bg-green-600 active:text-slate-50 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">Unread</div>
+                         <div className="tag bg-slate-500 active:bg-green-600 active:text-slate-50 hover:bg-slate-400 text-[10px] px-2 py-1 text-slate-300 rounded-full">Groups</div>
                     </div>
                </div>
                {/* //* home */}

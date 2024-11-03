@@ -3,10 +3,10 @@ import { useState } from "react"
 
 
 export default function ChatMessage() {
-     const user = 'Nehal'
-     const [allChats,setAllChat] = useState([])
+     const user = 'nehal'
+     
      const [chat, setChat] = useState('')
-     const [time , setTime] = useState('')
+     const [time, setTime] = useState('')
      const date = () => {
           const getDate = new Date()
           // console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
@@ -17,24 +17,50 @@ export default function ChatMessage() {
 
           setTime(`${hours}:${minutes} ${amPm}`)
      }
+     const [allChats, setAllChat] = useState([
+          {
+          sendername: 'nehal',
+          message: 'Hi',
+          time: "12:10 pm",
+          recieverName: "username",
+     },{
+          sendername: 'username',
+          message: 'kia kr rh ho',
+          time: "01:10 pm",
+          recieverName: "nehal",
+     },
+     {
+          sendername: 'nehal',
+          message: 'hello',
+          time: "01:10 pm",
+          recieverName: "username",
+     },{
+          sendername: 'username',
+          message: '.....?',
+          time: "01:10 pm",
+          recieverName: "nehal",
+     },
+])
      const messageHandler = () => {
           console.log('m chala')
           if (chat !== '') {
                console.log(chat, 'chat =.>>>')
                const message = {
-                    text:chat,
-                    severTimeStamp:time,
-                    sender:user,
+                    message: chat,
+                    time: time,
+                    sendername: user,
+                    recieverName : 'username',
                }
-               setAllChat([message])
+               console.log(...allChats , 'all chats ===<<<')
+               setAllChat([...allChats ,message ])
                setChat('')
                console.log("🚀 ~ messageHandler ~ message:", message)
           }
-               console.log("🚀 ~ messageHandler ~ allChats:", allChats)
+          console.log("🚀 ~ messageHandler ~ allChats:", allChats)
      }
-     useEffect(()=>{
+     useEffect(() => {
           date()
-     },[messageHandler])
+     }, [messageHandler])
      return (
           <div className="main bg-slate-700 flex flex-col flex-grow h-screen">
                {/* //* top header  */}
@@ -48,43 +74,57 @@ export default function ChatMessage() {
                     </div>
                </div>
                {/*  //* chats  */}
-               <div className="messages flex flex-col flex-grow bg-slate-600 border-3 relative p-3">
+               <div className="messages flex flex-col flex-grow bg-slate-600 border-3 overflow-y-auto overflow-x-hidden relative p-3">
                     {/* //* recieved msg */}
-                    <div className="left-msg">
+                    {/* <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">Hi</div>
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
-                    </div>
+                    </div> */}
                     {/* //* send message */}
-                    <div className="right-msg flex justify-end">
+                    {/* <div className="right-msg flex justify-end">
                          <div className="send-msg inline-block bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">ti</div>
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
-                    </div>
+                    </div> */}
                     {/* //* recieved msg */}
-                    <div className="left-msg">
+                    {/* <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">Kha ho,kia kr ri ho</div>
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
-                    </div>
+                    </div> */}
                     {/* //* send message */}
-                    <div className="right-msg flex justify-end">
+                    {/* <div className="right-msg flex justify-end">
                          <div className="send-msg inline-block bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">kch ni</div>
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
-                    </div>
+                    </div> */}
                     {/* //* recieved msg */}
-                    <div className="left-msg">
+                    {/* <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
                               <div className="rm-inner-msg text-sm flex justify-start">kesa ho , kia kr rh hoo</div>
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
-                    </div>
-
+                    </div> */}
+                    {allChats.map((data,index) => (
+                         data.sendername == 'nehal'?
+                              <div key={index} className=" right-msg flex justify-end mb-1">
+                                   <div className="send-msg inline-block max-w-[50%] bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
+                                        <div className="rm-inner-msg text-sm flex flex-grow justify-start ">{data.message}</div>
+                                        <div className="timestamp text-[8px] flex justify-end">{data.time}</div>
+                                   </div>
+                              </div>
+                         : data.sendername == 'username' ? <div className="left-msg">
+                              <div className=" recieved-msg inline-block max-w-[50%] bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg ">
+                                   <div className="rm-inner-msg text-sm flex justify-start">{data.message}</div>
+                                   <div className="timestamp text-[8px] flex justify-end">{data.time}</div>
+                              </div>
+                         </div>:''
+                    ))}
                </div>
                {/*  //* bottom */}
                <div className="footer bg-slate-700 w-full py-2">
