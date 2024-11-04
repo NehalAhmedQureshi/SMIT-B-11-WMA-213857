@@ -253,7 +253,7 @@ export default function ChatMessage() {
       <div className="footer bg-slate-700 w-full py-2">
         <div className="wrap flex gap-2 mx-3">
           <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"><i class='bx bx-smile'></i></div>
-          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
+          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"><i class="fa-solid fa-paperclip"></i></div>
           <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
           <input
             type="text"
@@ -267,7 +267,7 @@ export default function ChatMessage() {
           <div
             className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"
             onClick={fakeMsgHandler}
-          ></div>
+          ><i class='bx bxs-microphone'></i></div>
           <div
             className="sender px-2 rounded-full bg-slate-300 cursor-pointer flex justify-center items-center"
             onClick={messageHandler}
