@@ -1,0 +1,5 @@
+.messages .send-msg:hover {
+     .hoverIcon {
+          display: flex;
+     }
+}

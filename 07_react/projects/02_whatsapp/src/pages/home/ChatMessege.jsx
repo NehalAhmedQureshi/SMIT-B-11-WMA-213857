@@ -1,46 +1,49 @@
 import { useEffect } from "react"
 import { useState } from "react"
+import '../../App.css'
 
 
 export default function ChatMessage() {
      const user = 'nehal'
-     
+
      const [chat, setChat] = useState('')
      const [time, setTime] = useState('')
      const date = () => {
-          const getDate = new Date()
-          // console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
-
-          const hours = getDate.getHours() < 10 ? `0${getDate.getHours()}` : getDate.getHours() > 12 ? getDate.getHours() - 12 : ''
-          const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes()
-          const amPm = getDate.getHours > 12 ? 'PM' : 'AM'
-
-          setTime(`${hours}:${minutes} ${amPm}`)
-     }
+          const getDate = new Date();
+          const hours = getDate.getHours() < 10 
+              ? `0${getDate.getHours()}`
+              : getDate.getHours() > 12
+              ? getDate.getHours() - 12
+              : getDate.getHours();
+          const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes();
+          const amPm = getDate.getHours() > 12 ? 'PM' : 'AM';
+  
+          setTime(`${hours}:${minutes} ${amPm}`);
+      };
      const [allChats, setAllChat] = useState([
-          {
-          sendername: 'nehal',
-          message: 'Hi',
-          time: "12:10 pm",
-          recieverName: "username",
-     },{
-          sendername: 'username',
-          message: 'kia kr rh ho',
-          time: "01:10 pm",
-          recieverName: "nehal",
-     },
-     {
-          sendername: 'nehal',
-          message: 'hello',
-          time: "01:10 pm",
-          recieverName: "username",
-     },{
-          sendername: 'username',
-          message: '.....?',
-          time: "01:10 pm",
-          recieverName: "nehal",
-     },
-])
+          //      {
+          //      sendername: 'nehal',
+          //      message: 'Hi',
+          //      time: "12:10 pm",
+          //      recieverName: "username",
+          // },{
+          //      sendername: 'username',
+          //      message: 'kia kr rh ho',
+          //      time: "01:10 pm",
+          //      recieverName: "nehal",
+          // },
+          // {
+          //      sendername: 'nehal',
+          //      message: 'hello',
+          //      time: "01:10 pm",
+          //      recieverName: "username",
+          // },{
+          //      sendername: 'username',
+          //      message: '.....?',
+          //      time: "01:10 pm",
+          //      recieverName: "nehal",
+          // },
+     ])
      const messageHandler = () => {
           console.log('m chala')
           if (chat !== '') {
@@ -49,18 +52,38 @@ export default function ChatMessage() {
                     message: chat,
                     time: time,
                     sendername: user,
-                    recieverName : 'username',
+                    recieverName: 'username',
                }
-               console.log(...allChats , 'all chats ===<<<')
-               setAllChat([...allChats ,message ])
+
+               console.log(...allChats, 'all chats ===<<<')
+               setAllChat([...allChats, message])
+               localStorage.setItem('chats', JSON.stringify([...allChats,message]))
                setChat('')
                console.log("🚀 ~ messageHandler ~ message:", message)
           }
           console.log("🚀 ~ messageHandler ~ allChats:", allChats)
      }
-     useEffect(() => {
+     const fakeMsgHandler = () => {
+          const fakeMsg = {
+               message: chat,
+               time: time,
+               sendername: 'username',
+               recieverName: user,
+          }
+          if (chat !== "") {
+               setAllChat(prevChats => [...prevChats, fakeMsg]);
+               localStorage.setItem('chats', JSON.stringify([...allChats, fakeMsg]));
+               setChat('');
+           }
+
+     }
+     useEffect(()=>{
           date()
-     }, [messageHandler])
+     },[chat])
+     useEffect(() => {
+          const savedChats = JSON.parse(localStorage.getItem('chats')) || [];
+          setAllChat(savedChats);
+      }, []);
      return (
           <div className="main bg-slate-700 flex flex-col flex-grow h-screen">
                {/* //* top header  */}
@@ -110,20 +133,21 @@ export default function ChatMessage() {
                               <div className="timestamp text-[8px] flex justify-end">{time}</div>
                          </div>
                     </div> */}
-                    {allChats.map((data,index) => (
-                         data.sendername == 'nehal'?
+                    {allChats.map((data, index) => (
+                         data.sendername == 'nehal' ?
                               <div key={index} className=" right-msg flex justify-end mb-1">
-                                   <div className="send-msg inline-block max-w-[50%] bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
+                                   <div className="send-msg relative inline-block max-w-[50%] bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
+                                        <div className="hoverIcon absolute left-[-20px] top-[25%] rounded-full hidden justify-center items-center bg-slate-300 p-0 m-0"><i class='bx bx-chevron-down p-0 m-0 '></i></div>
                                         <div className="rm-inner-msg text-sm flex flex-grow justify-start ">{data.message}</div>
                                         <div className="timestamp text-[8px] flex justify-end">{data.time}</div>
                                    </div>
                               </div>
-                         : data.sendername == 'username' ? <div className="left-msg">
-                              <div className=" recieved-msg inline-block max-w-[50%] bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg ">
-                                   <div className="rm-inner-msg text-sm flex justify-start">{data.message}</div>
-                                   <div className="timestamp text-[8px] flex justify-end">{data.time}</div>
-                              </div>
-                         </div>:''
+                              : data.sendername == 'username' ? <div className="left-msg mb-1">
+                                   <div className=" recieved-msg inline-block max-w-[50%] bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg ">
+                                        <div className="rm-inner-msg text-sm flex justify-start">{data.message}</div>
+                                        <div className="timestamp text-[8px] flex justify-end">{data.time}</div>
+                                   </div>
+                              </div> : ''
                     ))}
                </div>
                {/*  //* bottom */}
@@ -134,7 +158,7 @@ export default function ChatMessage() {
                          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
                          <input type="text" className="w-5/6 text-sm text-slate-600 font-serif active: outline-none bg-slate-300 rounded-full pl-4" placeholder="Enter your message..."
                               value={chat} onChange={(e) => { setChat(e.target.value) }} />
-                         <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
+                         <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer" onClick={fakeMsgHandler}></div>
                          <div className="sender w-7 h-7 rounded-full bg-slate-300 cursor-pointer" onClick={messageHandler}></div>
                     </div>
                </div>
