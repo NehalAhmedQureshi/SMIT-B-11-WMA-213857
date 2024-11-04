@@ -1,4 +1,9 @@
-.messages .send-msg:hover {
+.messages .right-msg:hover {
+     .hoverIcon {
+          display: flex;
+     }
+}
+.messages .left-msg:hover {
      .hoverIcon {
           display: flex;
      }

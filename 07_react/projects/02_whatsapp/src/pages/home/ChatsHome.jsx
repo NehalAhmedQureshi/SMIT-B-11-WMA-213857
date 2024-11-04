@@ -6,16 +6,16 @@ export default function ChatsHome() {
 
      const [search , setSearch] = useState('')
      const getDate = new Date()
-     console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
+     // console.log("🚀 ~ ChatsHome ~ getDate:", getDate)
 
      const hours = getDate.getHours() < 10 ? `0${getDate.getHours()}` : getDate.getHours() > 12 ? getDate.getHours()-12 :''
      const minutes = getDate.getMinutes() < 10 ? `0${getDate.getMinutes()}` : getDate.getMinutes()
      const amPm = getDate.getHours > 12 ? 'PM' : 'AM'
 
      const time = `${hours}:${minutes} ${amPm}`
-     console.log("🚀 ~ ChatsHome ~ time:", time)
+     // console.log("🚀 ~ ChatsHome ~ time:", time)
 
-     console.log(search)
+     // console.log(search)
      const [allContacts , setContects] = useState([
           {
                'contactName':'Arib',
@@ -39,7 +39,7 @@ export default function ChatsHome() {
      const searched = allContacts?.filter(
           (data) => data.contactName.toLowerCase().indexOf(search) !== -1
      );
-     console.log("🚀 ~ ChatsHome ~ searched:", searched)
+     // console.log("🚀 ~ ChatsHome ~ searched:", searched)
 
 
      return (
