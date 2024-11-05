@@ -179,7 +179,7 @@ export default function ChatMessage() {
         </div>
       </div>
       {/*  //* chats  */}
-      <div className="messages flex flex-col flex-grow bg-slate-600 border-3 overflow-y-auto overflow-x-hidden relative p-3">
+      <div className="messages flex flex-col flex-grow bg-slate-600 overflow-y-auto overflow-x-hidden relative p-3">
         {/* //* recieved msg */}
         {/* <div className="left-msg">
                          <div className="recieved-msg inline-block bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg">
@@ -252,12 +252,14 @@ export default function ChatMessage() {
       {/*  //* bottom */}
       <div className="footer bg-slate-700 w-full py-2">
         <div className="wrap flex gap-2 mx-3">
-          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"><i class='bx bx-smile'></i></div>
-          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"><i class="fa-solid fa-paperclip"></i></div>
-          <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div>
+          <div className="emoji px-1 rounded-full text-slate-300 hover:bg-slate-500 transition-opacity cursor-pointer flex justify-center items-center">
+            <i class='bx bx-smile text-xl'></i></div>
+          <div className="emoji px-1 rounded-full text-slate-300 hover:bg-slate-500 transition-opacity cursor-pointer flex justify-center items-center">
+            <i class="fa-solid fa-paperclip text-xl"></i></div>
+          {/* <div className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"></div> */}
           <input
             type="text"
-            className="w-5/6 text-sm text-slate-600 font-serif active: outline-none bg-slate-300 rounded-full pl-4"
+            className="w-5/6 text-sm text-slate-600 font-serif active: outline-none bg-slate-300 rounded-full pl-4 flex-grow"
             placeholder="Enter your message..."
             value={chat}
             onChange={(e) => {
@@ -265,13 +267,13 @@ export default function ChatMessage() {
             }}
           />
           <div
-            className="emoji w-7 h-7 rounded-full bg-slate-300 cursor-pointer"
+            className="emoji px-1 rounded-full text-slate-300 hover:bg-slate-500 transition-opacity cursor-pointer flex justify-center items-center"
             onClick={fakeMsgHandler}
-          ><i class='bx bxs-microphone'></i></div>
+          ><i class='bx bxs-microphone text-xl'></i></div>
           <div
-            className="sender px-2 rounded-full bg-slate-300 cursor-pointer flex justify-center items-center"
+            className="sender px-1 rounded-full text-slate-300 hover:bg-slate-500 transition-opacity cursor-pointer flex justify-center items-center"
             onClick={messageHandler}
-          ><i class='bx bxs-send w-full'></i></div>
+          ><i class='bx bxs-send text-xl'></i></div>
         </div>
       </div>
     </div>
