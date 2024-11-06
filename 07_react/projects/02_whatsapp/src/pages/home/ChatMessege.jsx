@@ -16,8 +16,8 @@ export default function ChatMessage() {
       getDate.getHours() < 10
         ? `0${getDate.getHours()}`
         : getDate.getHours() > 12
-        ? getDate.getHours() - 12
-        : getDate.getHours();
+          ? getDate.getHours() - 12
+          : getDate.getHours();
     const minutes =
       getDate.getMinutes() < 10
         ? `0${getDate.getMinutes()}`
@@ -26,50 +26,51 @@ export default function ChatMessage() {
 
     setTime(`${hours}:${minutes} ${amPm}`);
   };
-  const [allChats, setAllChat] = useState([
-    //      {
-    //      sendername: 'nehal',
-    //      message: 'Hi',
-    //      time: "12:10 pm",
-    //      recieverName: "username",
-    // },{
-    //      sendername: 'username',
-    //      message: 'kia kr rh ho',
-    //      time: "01:10 pm",
-    //      recieverName: "nehal",
-    // },
-    // {
-    //      sendername: 'nehal',
-    //      message: 'hello',
-    //      time: "01:10 pm",
-    //      recieverName: "username",
-    // },{
-    //      sendername: 'username',
-    //      message: '.....?',
-    //      time: "01:10 pm",
-    //      recieverName: "nehal",
-    // },
-  ]);
+  const [allChats, setAllChat] = useState([]);
+  const [allDeleteChats , setDeleteChat] = useState([])
   const deleteMsgHandler = async (data) => {
     const messageContent = data.parentElement.parentElement.children[1].innerHTML;
-    // console.log(messageContent, 'delete msg');
-
-    // Filter out the message to be deleted
-    const updatedChats = allChats.filter(chat => chat.message !== messageContent);
-
-    // Update the state with the filtered chats
+    const dateContent = data.parentElement.parentElement.children[2].innerHTML;
+    console.log("🚀 ~ deleteMsgHandler ~ dateContent:", dateContent);
+  
+    // Create a copy of allChats to modify
+    const updatedChats = [];
+  
+    // Loop through all chats to find and mark the message to delete
+    for (const chat of allChats) {
+      if (chat.message === messageContent && chat.time === dateContent) {
+        // Mark the specific message as deleted
+        const deletedChat = { ...chat, isDelete: true };
+  
+        // Update Firestore database for this specific message
+        await firestoreDatabase([deletedChat], 'deleteMsg');
+  
+        // Store the deleted message temporarily in localStorage
+        localStorage.setItem('deleteMsg', JSON.stringify(deletedChat));
+  
+        updatedChats.push(deletedChat);
+      } else {
+        updatedChats.push(chat);
+      }
+    }
+  
+    // Update the state with the modified chats
     setAllChat(updatedChats);
-    await firestoreDatabase(updatedChats)
-
-    // Update localStorage as well
+  
+    // Update the Firestore database with the entire updated chat list
+    await firestoreDatabase(updatedChats, 'chats');
+  
+    // Persist the updated chats to localStorage
     localStorage.setItem('chats', JSON.stringify(updatedChats));
-
-    // console.log("🚀 ~ deleteMsgHandler ~ updatedChats:", updatedChats);
-};
+  
+    console.log("🚀 ~ deleteMsgHandler ~ updatedChats:", updatedChats);
+  };
+  
+  
 
   const messageHandler = async () => {
     // console.log('m chala')
-    await gettingData();
+    await gettingData('chats');
     if (chat !== "") {
       date();
       // console.log(chat, 'chat =.>>>')
@@ -80,16 +81,16 @@ export default function ChatMessage() {
         recieverName: "username",
       };
       localStorage.setItem("chats", JSON.stringify([...allChats, message]));
-      await firestoreDatabase([...allChats, message]);
+      await firestoreDatabase([...allChats, message],'chats');
       // console.log('After setting chat and updating database:', message);
       // console.log('message handler wala function hu')
       setChat("");
       // console.log("🚀 ~ messageHandler ~ message:", message)
-      await gettingData();
+      await gettingData('chats');
     }
   };
   const fakeMsgHandler = async () => {
-    await gettingData();
+    await gettingData('chats');
     date();
     const fakeMsg = {
       message: chat,
@@ -99,17 +100,18 @@ export default function ChatMessage() {
     };
     if (chat !== "") {
       localStorage.setItem("chats", JSON.stringify([...allChats, fakeMsg]));
-      await firestoreDatabase([...allChats, fakeMsg]);
+      await firestoreDatabase([...allChats, fakeMsg],'chats');
       // console.log('fake msg wala function hu')
       setChat("");
-      await gettingData();
+      await gettingData('chats');
     }
   };
-  const firestoreDatabase = async (chat) => {
+  const firestoreDatabase = async (chat,docName) => {
+    console.log("🚀 ~ firestoreDatabase ~ docName:", docName)
     // console.log("🚀 ~ firestoreDatabase ~ chat:", chat)
     // console.log('data base update kr rh hu')
     try {
-      const docRef = await setDoc(doc(db, "chats", `${user}-${sender}`), {
+      const docRef = await setDoc(doc(db, docName, `${user}-${sender}`), {
         message: [...chat],
         info: {
           username: user,
@@ -122,20 +124,26 @@ export default function ChatMessage() {
       console.error("Error adding document: ", e);
     }
   };
-  const gettingData = async () => {
+  const gettingData = async (docName) => {
     try {
       //     console.log('Fetching data from the database...');
-      const result = await getDoc(doc(db, "chats", `${user}-${sender}`));
+      const result = await getDoc(doc(db, docName, `${user}-${sender}`));
 
       //     console.log('After result retrieval');
       // Ensure `result` exists and `message` field is retrieved properly
-      const messages = result?.data()?.message || [];
+      if(docName === 'chats'){
+        const messages = result?.data()?.message || [];
 
       //     console.log("🚀 ~ gettingData ~ messages:", messages);
       //     console.log('Saving data to localStorage...');
       localStorage.setItem("chats", JSON.stringify(messages));
 
       setAllChat(messages); // Update state
+      }else{
+        const messages = result?.data()?.message || [];
+        localStorage.setItem(docName ,  JSON.stringify(messages) )
+        setDeleteChat(messages)
+      }
     } catch (error) {
       console.error("Error fetching chat data:", error);
     }
@@ -149,13 +157,15 @@ export default function ChatMessage() {
   useEffect(() => {
     // console.log('useEffect k ander hu data laun ga data base ss pir local storage s laun ga')
     // console.log('data base s data la k ab local storage s la rh hu')
-    gettingData();
+    gettingData('chats');
+    gettingData('deleteMsg');
     const savedChats = JSON.parse(localStorage.getItem("chats"));
     setAllChat(savedChats);
   }, []);
   useEffect(() => {
     date();
-    gettingData();
+    gettingData('chats');
+    gettingData('deleteMsg');
   }, [chat, messageHandler, fakeMsgHandler]);
   // update firestore database
   // useEffect(()=>{
@@ -220,10 +230,10 @@ export default function ChatMessage() {
             <div key={index} className=" right-msg flex justify-end mb-1">
               <div className="send-msg relative inline-block max-w-[50%] bg-slate-500 px-3 py-1 rounded-r-lg rounded-bl-lg">
                 <div className="hoverIcon absolute left-[-25px] top-[25%] rounded-full hidden justify-center items-center bg-slate-300 p-0 m-0 transition-opacity cursor-pointer">
-                  <i class="bx bx-chevron-down p-0 m-0 " onClick={(e)=>{deleteMsgHandler(e.target)}}></i>
+                  <i class="bx bx-chevron-down p-0 m-0 " onClick={(e) => { deleteMsgHandler(e.target) }}></i>
                 </div>
                 <div className="rm-inner-msg text-sm flex flex-grow justify-start ">
-                  {data.message}
+                  {data?.isDelete ? 'This message was deleted by sender' : data.message}
                 </div>
                 <div className="timestamp text-[8px] flex justify-end">
                   {data.time}
@@ -233,11 +243,11 @@ export default function ChatMessage() {
           ) : data.sendername == "username" ? (
             <div key={index} className="left-msg mb-1">
               <div className=" recieved-msg relative inline-block max-w-[50%] bg-green-700 px-3 py-1 rounded-r-lg rounded-bl-lg ">
-              <div className="hoverIcon absolute right-[-25px] top-[25%] rounded-full hidden justify-center items-center bg-slate-300 p-0 m-0 transition-opacity cursor-pointer">
-                  <i class="bx bx-chevron-down p-0 m-0 " onClick={(e)=>{deleteMsgHandler(e.target)}}></i>
+                <div className="hoverIcon absolute right-[-25px] top-[25%] rounded-full hidden justify-center items-center bg-slate-300 p-0 m-0 transition-opacity cursor-pointer">
+                  <i class="bx bx-chevron-down p-0 m-0 " onClick={(e) => { deleteMsgHandler(e.target) }}></i>
                 </div>
                 <div className="rm-inner-msg text-sm flex justify-start">
-                  {data.message}
+                {data?.isDelete ? 'This message was deleted by sender' : data.message}
                 </div>
                 <div className="timestamp text-[8px] flex justify-end">
                   {data.time}
