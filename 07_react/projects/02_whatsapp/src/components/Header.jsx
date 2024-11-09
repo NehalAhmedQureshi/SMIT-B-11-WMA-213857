@@ -1,7 +1,14 @@
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { useContext } from "react"
+import { UserContext } from "../context/userContext"
+import { ProfileContext } from "../context/profileContext"
+
 
 export default function Header() {
+     const {isShowProfile , setIsShowProfile} = useContext(ProfileContext)
+     console.log("🚀 ~ Header ~ isShowProfile:", isShowProfile)
+     const {user} = useContext(UserContext)
      return (
           <div className="header bg-slate-600 h-screen flex flex-col justify-between py-2 px-2">
                <div className="homeIcons flex flex-col gap-0 items-center">
@@ -23,8 +30,9 @@ export default function Header() {
                <div className="icon text-slate-200 hover:bg-slate-500 flex justify-center p-2 rounded-full cursor-pointer">
                <i class="fa-solid fa-gear text-xl"></i>
                </div>
-               <div className="icon text-slate-200 hover:bg-slate-500 rounded-full flex justify-center items-center cursor-pointer p-2">
-               <i class="fa-solid fa-user-secret text-xl"></i>
+               <div className="icon text-slate-200 bg-slate-400 hover:bg-slate-500 rounded-full flex justify-center items-center cursor-pointer p-2" 
+               onClick={()=>setIsShowProfile(!isShowProfile)}>
+               {user.isLogin ? user.username.slice(0,2) : <i class="fa-solid fa-user-secret text-xl"></i>}
                </div>
                </div>
           </div>

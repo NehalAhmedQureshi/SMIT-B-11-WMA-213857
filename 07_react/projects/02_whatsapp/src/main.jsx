@@ -7,11 +7,14 @@ import ChatsHome from './pages/home/ChatsHome.jsx'
 import ChatMessage from './pages/home/ChatMessege.jsx'
 import './index.css'
 import UserContextProvider from './context/userContext.jsx'
+import ProfileContextProvider from './context/profileContext.jsx'
 
 createRoot(document.getElementById('root')).render(
     <UserContextProvider>
-        <NextUIProvider>
-            <App />
-        </NextUIProvider>
-    </UserContextProvider>
+        <ProfileContextProvider>
+            <NextUIProvider>
+                <App />
+            </NextUIProvider>
+        </ProfileContextProvider>
+    </UserContextProvider >
 )
