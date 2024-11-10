@@ -26,7 +26,6 @@ function UserContextProvider({ children }) {
                          ...userInfo.data(),
                     })
                     setLoading(false)
-                    // console.log('user hy =><=')
                } else {
                     setLoading(false)
                     setUser({
@@ -41,10 +40,10 @@ function UserContextProvider({ children }) {
 
      }, [])
      return (
-          <UserContext.Provider value={{ user, setUser }}>
+          <UserContext.Provider value={{ user, setUser,isLoading }}>
                {isLoading ?
                     <div className="wrap w-full h-screen flex justify-center items-center">
-                         <div className=" loader"></div>
+                         <div className=" loader">loading...</div>
                     </div>
                     : children
                }

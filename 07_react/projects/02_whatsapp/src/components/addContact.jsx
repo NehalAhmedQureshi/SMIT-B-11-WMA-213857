@@ -1,9 +1,10 @@
 import { Button } from "@nextui-org/react";
 import { createUserWithEmailAndPassword } from "firebase/auth/web-extension";
 import { auth, db } from "../utils/firebase";
-import { useReducer } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import { useEffect, useReducer } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { keyframes } from "framer-motion/dom";
+import { getDataConnect } from "firebase/data-connect";
 
 export default function AddContact() {
 
@@ -46,6 +47,11 @@ export default function AddContact() {
                ...state,
                loading: !state.loading
             }
+            case  'allContact':
+            return{
+               ...state,
+               users:action.value
+            }
          default:
             return {
                ...state,
@@ -56,52 +62,43 @@ export default function AddContact() {
    const initializeValue = {
       email: '',
       password: '',
-      username: '',
+      username: 'guest',
       phoneNo: '',
       showPassword: false,
       error: '',
       loading:false,
+      users:[]
    }
 
    const [state, dispatch] = useReducer(reducer, initializeValue)
-   // console.log("🚀 ~ AddContact ~ state:", state)
+   console.log("🚀 ~ AddContact ~ state:", state)
 
    const handleSignup = async () => {
       try {
-         // dispatch({key:'error',value:''})
-        console.log('User signing up...');
-         dispatch({key:'loading'})
-        // Create the user with email and password
-        const result = await createUserWithEmailAndPassword(auth, state.email, state.password);
+        dispatch({ key: 'error', value: '' });
+        dispatch({ key: 'loading', value: true });
     
-        // Prepare user details with the UID from result
+        console.log('User signing up...');
+        const result = await createUserWithEmailAndPassword(auth, state.email, state.password);
+        console.log("🚀 ~ handleSignup ~ result:", result.user);
+    
         const userDetails = {
           uid: result.user.uid,
           email: state.email,
-          password: state.password,
           username: state.username,
           phoneNo: state.phoneNo,
         };
+        console.log("🚀 ~ handleSignup ~ userDetails:", userDetails);
     
-        // Reference to the users collection with the UID as the document ID
         const docRef = doc(db, 'users', result.user.uid);
-    
-        // Set user details in Firestore
         await setDoc(docRef, userDetails);
-        console.log("🚀 ~ handleSignup ~ User added to Firestore:", userDetails);
-        console.log("🚀 ~ handleSignup ~ Firebase Auth result:", result);
-        // Clear the state using dispatch or state setters
-        dispatch({ key: 'username', value: '' });
-        dispatch({ key: 'password', value: '' });
-        dispatch({ key: 'phoneNo', value: '' });
-        dispatch({ key: 'email', value: '' });
-        dispatch({key:'loading'})
-      } catch (error) {
-         dispatch({key:'loading'})
-        console.error("🚀 ~ handleSignup ~ error:", error);
-      //   dispatch({key:'error',value:'error.message'})
     
-        // Clear the state in case of an error as well
+        dispatch({ key: 'loading', value: false });
+      } catch (error) {
+        console.error("🚀 ~ handleSignup ~ error:", error.message);
+        dispatch({ key: 'error', value: error.message });
+        dispatch({ key: 'loading', value: false });
+      } finally {
         dispatch({ key: 'username', value: '' });
         dispatch({ key: 'password', value: '' });
         dispatch({ key: 'phoneNo', value: '' });
@@ -109,7 +106,21 @@ export default function AddContact() {
       }
     };
     
+    
+    async function getContacts(){
+      const contacts = await getDoc(doc(db , 'chats' , 'users'))
+      console.log("🚀 ~ getContacts ~ contacts:", contacts.data() || [])
+      const allContact = contacts.data() || []
+      dispatch({
+         value:'allContacts',
+         key:allContact
+      })
+    }
 
+    useEffect(()=>{
+      console.log('hi')
+      getContacts()
+    },[])
 
    return (
       <div className="home h-full overflow-y-auto  flex justify-center text-slate-50 px-3">
