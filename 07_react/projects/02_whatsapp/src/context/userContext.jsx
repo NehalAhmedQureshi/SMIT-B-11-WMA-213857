@@ -15,6 +15,7 @@ function UserContextProvider({ children }) {
      })
 
      const [isLoading, setLoading] = useState(true)
+     console.log("🚀 ~ UserContextProvider ~ isLoading:", isLoading)
      useEffect(() => {
           const subscriber = onAuthStateChanged(auth, async (user) => {
                if (user) {
@@ -41,9 +42,9 @@ function UserContextProvider({ children }) {
      }, [])
      return (
           <UserContext.Provider value={{ user, setUser,isLoading }}>
-               {isLoading ?
+               {isLoading == true ?
                     <div className="wrap w-full h-screen flex justify-center items-center">
-                         <div className=" loader">loading...</div>
+                         <div className="loader"></div>
                     </div>
                     : children
                }

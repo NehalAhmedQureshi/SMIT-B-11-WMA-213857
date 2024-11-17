@@ -1,0 +1,15 @@
+{
+  "name": "02-express",
+  "version": "1.0.0",
+  "description": "first project using express",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "author": "NehalAhmedQureshi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  }
+}
