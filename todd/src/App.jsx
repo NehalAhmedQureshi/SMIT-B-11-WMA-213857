@@ -2,41 +2,57 @@ import { useDebugValue, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import List from "./component/List";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [name , setName] = useState()
-  console.log("🚀 ~ App ~ name:", name)
-  const [error , setError] = useState('')
+  const [name, setName] = useState();
+  // console.log("🚀 ~ App ~ name:", name)
+  const [error, setError] = useState("");
   const [sectionName, setSectionName] = useState("");
+  console.log("🚀 ~ App ~ sectionName:", sectionName);
   const [innerData, setData1] = useState("");
-  const [section, setSection] = useState([]);
-  console.log("🚀 ~ App ~ section:", section)
-  // console.log("🚀 ~ App ~ data:", data)
-  // console.log("🚀 ~ App ~ section:", section)
+  const [section, setSection] = useState({});
+  const [isedit, setIsEdit] = useState(false);
+  console.log("🚀 ~ App ~ section:", section);
+  // const allKeys = Object.keys(section)
+  // console.log("🚀 ~ App ~ allKeys:", allKeys)
   const addSection = () => {
-    if(sectionName != ''){
-      setSection([...section,{sectionName , data:[]}])
+    if (sectionName.trim() !== "") {
+      setSection((prevSection) => ({
+        ...prevSection,
+        [sectionName]: [], // Dynamically add a new section with an empty array
+      }));
+      setSectionName(""); // Clear the input after adding the section
+    } else {
+      console.warn("Section name cannot be empty!");
     }
-    setSectionName('')
-  }
-  const addData=()=>{
-    if (innerData !== '' && name !== null) {
-        section.map((data,index)=>{
-          console.log(data)
-          const currentData = data.sectionName == name ? data.data : []
-          const newArr = section.filter((a)=> a.sectionName !== name)
-          console.log("🚀 ~ section.map ~ currentData:", currentData)
-          setSection(
-            [...newArr , {
-              sectionName : name,
-              data:[...currentData,innerData]
-            }]
-          )
-          setData1('')
-        })
+  };
+
+  const addData = () => {
+    if (innerData !== "" && name !== null) {
+      Object.keys(section).map((data) => {
+        // console.log(data)
+        // const currentData = data.sectionName == name ? data.data : []
+        // const newArr = section.filter((a)=> a.sectionName !== name)
+        // console.log("🚀 ~ section.map ~ currentData:", currentData)
+        // setSection(
+        //   [...newArr , {
+        //     sectionName : name,
+        //     data:[...currentData,innerData]
+        //   }]
+        // )
+        // const currentUpdate = data == name
+        if (data == name) {
+          setSection((pre) => ({
+            ...pre,
+            [data]: [...section[data], innerData],
+          }));
+        }
+        setData1("");
+      });
     }
-  }
+  };
 
   return (
     <div className="main">
@@ -49,10 +65,18 @@ function App() {
           placeholder="Card Data..."
           value={innerData}
         />
-        <select onChange={(e)=>{setName(e.target.value)}}>
-          <option value="null" selected>Select Section</option>
-          {section.map((data,index)=>(
-            <option value={data.sectionName}>{data.sectionName}</option>
+        <select
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        >
+          <option value="null" selected>
+            Select Section
+          </option>
+          {Object.keys(section).map((key, index) => (
+            <option value={key} key={index}>
+              {key.toUpperCase()}
+            </option>
           ))}
         </select>
         <button onClick={addData}>Add</button>
@@ -71,14 +95,16 @@ function App() {
           <button onClick={addSection}>Add</button>
         </div>
         <div className="sections">
-          {section.map((data, index) => (
-            <div className="section">
-              <h1 className="header">{data.sectionName}</h1>
-                <div className="lists">
-                  {data.data.map((innerData , index1 ) => (
-                    <input type="text" value={innerData} disabled={true} />
+          {Object.keys(section).map((data) => (
+            <div className="section" key={data}>
+              <h1 className="header">{data.toUpperCase()}</h1> <hr />
+              <div className="lists">
+                <ul>
+                  {section[data].map((item, index) => (
+                    <List name={item} key={index}/>
                   ))}
-                </div>
+                </ul>
+              </div>
             </div>
           ))}
         </div>
