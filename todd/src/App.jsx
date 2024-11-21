@@ -32,17 +32,6 @@ function App() {
   const addData = () => {
     if (innerData !== "" && name !== null) {
       Object.keys(section).map((data) => {
-        // console.log(data)
-        // const currentData = data.sectionName == name ? data.data : []
-        // const newArr = section.filter((a)=> a.sectionName !== name)
-        // console.log("🚀 ~ section.map ~ currentData:", currentData)
-        // setSection(
-        //   [...newArr , {
-        //     sectionName : name,
-        //     data:[...currentData,innerData]
-        //   }]
-        // )
-        // const currentUpdate = data == name
         if (data == name) {
           setSection((pre) => ({
             ...pre,
@@ -101,7 +90,7 @@ function App() {
               <div className="lists">
                 <ul>
                   {section[data].map((item, index) => (
-                    <List name={item} key={index}/>
+                    <List name={item} key={data} section={section} setSection={setSection}/>
                   ))}
                 </ul>
               </div>
