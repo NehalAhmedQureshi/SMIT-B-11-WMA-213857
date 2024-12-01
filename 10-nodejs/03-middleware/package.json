@@ -1,0 +1,24 @@
+{
+  "name": "03-middleware",
+  "version": "1.0.0",
+  "description": "this code base define and explain middleware in express or backend code",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "keywords": [
+    "backend",
+    "javascript",
+    "server"
+  ],
+  "author": "nehalahmedqureshi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
